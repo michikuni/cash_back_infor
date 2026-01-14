@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../utils/bottom_action_section.dart';
 
 class SigninWidget extends StatelessWidget {
@@ -11,7 +12,9 @@ class SigninWidget extends StatelessWidget {
       body: SafeArea(child: Column(
         children: [
           Align(alignment: Alignment.center,),
-          BottomActionSection(onContinue: (){}, textButton: 'Đăng ký', text: 'đăng nhập', button: 'Đăng nhập',)
+          BottomActionSection(onContinue: (){}, textButton: 'Đăng ký', text: 'đăng nhập', button: 'Đăng nhập', onChangedSign: () {
+            context.go('/sign-up');
+          },)
         ],
       )),
     );

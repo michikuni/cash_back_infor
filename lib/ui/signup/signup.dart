@@ -1,5 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../utils/bottom_action_section.dart';
 
 class SignupWidget extends StatefulWidget {
@@ -55,6 +56,9 @@ class _SignupWidgetState extends State<SignupWidget> {
                   textButton: 'Đăng nhập',
                   onContinue: () {
 
+                  },
+                  onChangedSign: () {
+                    context.go('/');
                   },
                 ),
               ],

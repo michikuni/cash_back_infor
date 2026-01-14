@@ -4,11 +4,12 @@ import 'button_primary.dart';
 
 class BottomActionSection extends StatelessWidget {
   final VoidCallback onContinue;
+  final VoidCallback onChangedSign;
   final String textButton;
   final String text;
   final String button;
 
-  const BottomActionSection({super.key, required this.onContinue, required this.textButton, required this.text, required this.button});
+  const BottomActionSection({super.key, required this.onContinue, required this.textButton, required this.text, required this.button, required this.onChangedSign});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -85,7 +86,7 @@ class BottomActionSection extends StatelessWidget {
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero
                 ),
-                onPressed: () {},
+                onPressed: onChangedSign,
                 child: Text(
                   textButton,
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
