@@ -1,43 +1,68 @@
-import 'package:cash_back_infor/utils/button_primary.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../utils/bottom_action_section.dart';
 
 class SignupWidget extends StatefulWidget {
   const SignupWidget({super.key});
-
   @override
   State<SignupWidget> createState() => _SignupWidgetState();
 }
 
 class _SignupWidgetState extends State<SignupWidget> {
-  String? phoneNumber;
-  final TextEditingController textController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String? _phoneStatus;
+  bool _isValidPhone = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(leading: Icon(Icons.arrow_back_ios_rounded)),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
-          child: Column(
-            children: [
-              _HeaderSection(),
-              const SizedBox(height: 21),
-              _PhoneInputSection(),
-              const Spacer(),
-              _BottomActionSection(),
-            ],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                _HeaderSection(),
+                const SizedBox(height: 21),
+                _PhoneInputSection(
+                  isValid: _isValidPhone,
+                  onValidate: (valid) {
+                    setState(() => _isValidPhone = valid);
+                  },
+                  onStatusChange: (status) {
+                    setState(() => _phoneStatus = status);
+                  },
+                ),
+                if (_isValidPhone)
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text(
+                        _phoneStatus!,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Color(0xFF92C73D),
+                        ),
+                      ),
+                    ),
+                  ),
+                Expanded(child: Container()),
+                BottomActionSection(
+                  button: 'Tiếp tục',
+                  text: 'đăng ký',
+                  textButton: 'Đăng nhập',
+                  onContinue: () {
+
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    textController.dispose();
-    super.dispose();
   }
 }
 
@@ -62,14 +87,25 @@ class _HeaderSection extends StatelessWidget {
 }
 
 class _PhoneInputSection extends StatelessWidget {
-  const _PhoneInputSection();
+  final ValueChanged<bool> onValidate;
+  final ValueChanged<String?> onStatusChange;
+  final bool isValid;
+
+  const _PhoneInputSection({
+    required this.onValidate,
+    required this.onStatusChange,
+    required this.isValid,
+  });
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       height: 62,
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
+        border: Border.all(
+          color: isValid ? Color(0xFF92C73D) : Colors.grey,
+        ),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -88,120 +124,39 @@ class _PhoneInputSection extends StatelessWidget {
           ),
           const VerticalDivider(width: 1, indent: 16, endIndent: 16),
           const SizedBox(width: 4),
+          
           Expanded(
-            child: TextField(
+            child: TextFormField(
               keyboardType: TextInputType.phone,
               textAlign: TextAlign.start,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Số điện thoại',
+                errorStyle: TextStyle(height: 0),
                 hintStyle: Theme.of(
                   context,
                 ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
+                suffixIcon: isValid
+                    ? const Icon(Icons.check_circle, color: Colors.green)
+                    : null,
               ),
+              onChanged: (value) {
+                final phoneRegExp = RegExp(r'^[0-9]+$');
+
+                if (value.isNotEmpty &&
+                    phoneRegExp.hasMatch(value) &&
+                    value.length >= 10 &&
+                    value.length <= 11) {
+                  onValidate(true);
+                  onStatusChange('Số điện thoại khả dụng');
+                } else {
+                  onValidate(false);
+                  onStatusChange(null);
+                }
+              },
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _BottomActionSection extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        PrimaryButton(text: 'Tiếp tục', onPressed: () {}, enabled: true),
-        const SizedBox(height: 37),
-        Row(
-          children: [
-            const Expanded(child: Divider()),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
-                'Hoặc đăng ký với',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodySmall?.copyWith(color: const Color(0xFF777777)),
-              ),
-            ),
-            const Expanded(child: Divider()),
-          ],
-        ),
-        SizedBox(height: 43),
-        Row(
-          children: [
-            Expanded(
-              child: _SocialButton(
-                bgColor: const Color(0xFF1877F2),
-                child: const Icon(
-                  FontAwesomeIcons.facebook,
-                  color: Colors.white,
-                ),
-                onTap: () {
-                  print('Facebook tap');
-                },
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _SocialButton(
-                bgColor: Colors.white,
-                border: Border.all(color: Colors.grey),
-                child: Image.asset('assets/image/google.png', height: 20),
-                onTap: () {
-                  print('Google tap');
-                },
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _SocialButton(
-                bgColor: Colors.black,
-                child: const Icon(FontAwesomeIcons.apple, color: Colors.white),
-                onTap: () {
-                  print('Apple tap');
-                },
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class _SocialButton extends StatelessWidget {
-  final Widget child;
-  final VoidCallback onTap;
-  final Color bgColor;
-  final BoxBorder? border;
-
-  const _SocialButton({
-    required this.child,
-    required this.onTap,
-    required this.bgColor,
-    this.border,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: bgColor,
-      borderRadius: BorderRadius.circular(8),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
-        child: Container(
-          height: 44,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: border,
-          ),
-          alignment: Alignment.center,
-          child: child,
-        ),
       ),
     );
   }

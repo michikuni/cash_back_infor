@@ -1,3 +1,4 @@
+import 'package:cash_back_infor/ui/signin/signin.dart';
 import 'package:cash_back_infor/ui/test.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -10,13 +11,14 @@ void main() {
 }
 
 final GoRouter _router = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/sign-up',
   routes: [
     GoRoute(path: '/test', builder: (context, state) {
       final String name = state.extra as String;
       return TestWidget(name: name);
     },),
-    GoRoute(path: '/', builder: (context, state) => const SignupWidget(),),
+    GoRoute(path: '/', builder: (context, state) => const SigninWidget(),),
+    GoRoute(path: '/sign-up', builder: (context, state) => const SignupWidget(),),
     GoRoute(path: '/cash-back', builder: (context, state) => const CashBackWidget(),)
 
   ],
@@ -36,7 +38,8 @@ class MonkeyApp extends StatelessWidget {
         textTheme: GoogleFonts.nunitoTextTheme(textTheme).copyWith(
           bodyLarge: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
           bodyMedium: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
-          bodySmall: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w800))
+          bodySmall: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+          labelMedium: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w800))
         )
 
       ),
