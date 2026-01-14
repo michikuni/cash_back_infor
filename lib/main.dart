@@ -1,31 +1,43 @@
+import 'package:cash_back_infor/ui/test.dart';
 import 'package:flutter/material.dart';
-import 'cash_back_info.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'ui/cashback/cash_back_info.dart';
+import 'ui/signup/signup.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MonkeyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+final GoRouter _router = GoRouter(
+  initialLocation: '/',
+  routes: [
+    GoRoute(path: '/test', builder: (context, state) {
+      final String name = state.extra as String;
+      return TestWidget(name: name);
+    },),
+    GoRoute(path: '/', builder: (context, state) => const SignupWidget(),),
+    GoRoute(path: '/cash-back', builder: (context, state) => const CashBackWidget(),)
+
+  ],
+);
+
+class MonkeyApp extends StatelessWidget {
+  const MonkeyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Thông tin nhận hoàn tiền', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Nunito'),),
-          leading: IconButton(
-            icon: const Icon(FontAwesomeIcons.angleLeft),
-            onPressed: () {
-              // Handle back button press
-            },
-          ),
-          elevation: 1,
-          shadowColor: Colors.grey.withValues(alpha: 0.5),
-        ),
-        body: CashBackWidget(),
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: _router,
+      theme: ThemeData(
+        textTheme: GoogleFonts.nunitoTextTheme(textTheme).copyWith(
+          bodyLarge: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
+          bodyMedium: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w800))
+        )
+
       ),
     );
   }
