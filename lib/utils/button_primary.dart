@@ -21,17 +21,21 @@ class PrimaryButton extends StatelessWidget {
         height: 56,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: enabled ? const Color(0xFF36BFFA) : Colors.grey.shade300,
+          color: enabled ? const Color(0xFF36BFFA) : Color(0xFFE5E5E5),
           borderRadius: BorderRadius.circular(12),
           boxShadow: enabled
               ? [
                   const BoxShadow(
                     color: Color(0xFF00B2FF),
-                    blurRadius: 6,
                     offset: Offset(0, 3),
                   )
                 ]
-              : [],
+              : [
+                const BoxShadow(
+                    color: Color(0xFFD6D6D6),
+                    offset: Offset(0, 3),
+                  )
+              ],
         ),
         child: Text(
           text,
