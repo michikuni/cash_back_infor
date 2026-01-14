@@ -35,7 +35,8 @@ class MonkeyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.nunitoTextTheme(textTheme).copyWith(
           bodyLarge: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
-          bodyMedium: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w800))
+          bodyMedium: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+          bodySmall: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w800))
         )
 
       ),
