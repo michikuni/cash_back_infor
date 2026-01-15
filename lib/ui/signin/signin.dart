@@ -14,7 +14,8 @@ class SigninWidget extends StatelessWidget {
           Align(alignment: Alignment.center,),
           BottomActionSection(onContinue: (){}, textButton: 'Đăng ký', text: 'đăng nhập', button: 'Đăng nhập', onChangedSign: () {
             context.go('/sign-up');
-          },)
+          },
+          state: true)
         ],
       )),
     );

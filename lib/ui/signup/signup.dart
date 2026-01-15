@@ -30,30 +30,30 @@ class _SignupWidgetState extends State<SignupWidget> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      _HeaderSection(isValid: state.isValid,onChanged: (value) {
-                        context.read<SignupCubit>().phoneChanged(value);
-                      },),
-                      if (state.phone.isValid)
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 8),
-                            child: Text(
-                              'Số điện thoại khả dụng',
-                              style: Theme.of(context).textTheme.bodySmall
-                                  ?.copyWith(color: Color(0xFF92C73D)),
-                            ),
-                          ),
-                        ),
+                      _HeaderSection(
+                        state: state,
+                        onPhoneChanged: (value) {
+                          context.read<SignupCubit>().phoneChanged(value);
+                        },
+                        onPasswordChanged: (value) {
+                          context.read<SignupCubit>().passwordChanged(value);
+                        },
+                        onCfPasswordChanged: (value) {
+                          context.read<SignupCubit>().confirmPasswordChanged(value);
+                        },
+                      ),
                       Expanded(child: Container()),
                       BottomActionSection(
                         button: 'Tiếp tục',
                         text: 'đăng ký',
                         textButton: 'Đăng nhập',
-                        onContinue: () {},
+                        onContinue: () {
+                          context.read<SignupCubit>().nextStep();
+                        },
                         onChangedSign: () {
                           context.go('/');
                         },
+                        state: context.read<SignupCubit>().buttonState()
                       ),
                     ],
                   ),
@@ -68,10 +68,17 @@ class _SignupWidgetState extends State<SignupWidget> {
 }
 
 class _HeaderSection extends StatelessWidget {
-  final bool isValid;
-  final ValueChanged<String> onChanged;
+  final SignupState state;
+  final ValueChanged<String> onPhoneChanged;
+  final ValueChanged<String> onPasswordChanged;
+  final ValueChanged<String> onCfPasswordChanged;
 
-  const _HeaderSection({required this.isValid, required this.onChanged});
+  const _HeaderSection({
+    required this.state,
+    required this.onPhoneChanged,
+    required this.onPasswordChanged,
+    required this.onCfPasswordChanged,
+  });
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -82,8 +89,42 @@ class _HeaderSection extends StatelessWidget {
           child: Image.asset('assets/image/monkey.png', width: 151),
         ),
         const SizedBox(height: 11),
-        PhoneInputSection(isValid: isValid, onChanged: onChanged)
+        _buildInput(
+          state,
+          onPhoneChanged,
+          onPasswordChanged,
+          onCfPasswordChanged,
+        ),
       ],
     );
+  }
+}
+
+Widget _buildInput(
+  SignupState state,
+  ValueChanged<String> onPhoneChanged,
+  ValueChanged<String> onPasswordChanged,
+  ValueChanged<String> onCfPasswordChanged,
+) {
+  switch (state.step) {
+    case SignupStep.phone:
+      return PhoneInputSection(
+        isValid: state.phone.isValid,
+        onChanged: onPhoneChanged,
+      );
+    case SignupStep.password:
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          PasswordInputSection(
+            isValid: state.password.isValid,
+            onChanged: onPasswordChanged,
+          ),
+          ConfirmPasswordInputSection(
+            state: state,
+            onChanged: onCfPasswordChanged,
+          ),
+        ],
+      );
   }
 }

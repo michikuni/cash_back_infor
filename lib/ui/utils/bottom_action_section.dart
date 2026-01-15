@@ -8,14 +8,23 @@ class BottomActionSection extends StatelessWidget {
   final String textButton;
   final String text;
   final String button;
+  final bool state;
 
-  const BottomActionSection({super.key, required this.onContinue, required this.textButton, required this.text, required this.button, required this.onChangedSign});
+  const BottomActionSection({
+    super.key,
+    required this.onContinue,
+    required this.textButton,
+    required this.text,
+    required this.button,
+    required this.onChangedSign,
+    required this.state,
+  });
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        PrimaryButton(text: button, onPressed: onContinue, enabled: true),
-        const SizedBox(height: 37),
+        PrimaryButton(text: button, onPressed: onContinue, enabled: state),
+        const SizedBox(height: 27),
         Row(
           children: [
             const Expanded(child: Divider()),
@@ -83,9 +92,7 @@ class BottomActionSection extends StatelessWidget {
                 ).textTheme.labelMedium?.copyWith(color: Color(0xFF777777)),
               ),
               TextButton(
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero
-                ),
+                style: TextButton.styleFrom(padding: EdgeInsets.zero),
                 onPressed: onChangedSign,
                 child: Text(
                   textButton,
