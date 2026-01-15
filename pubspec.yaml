@@ -40,6 +40,8 @@ dependencies:
   intl_phone_field: ^3.2.0
   country_code_picker: ^3.4.1
   google_fonts: ^7.0.2
+  formz: ^0.8.0
+  flutter_bloc: ^9.1.1
 
 dev_dependencies:
   flutter_test:
