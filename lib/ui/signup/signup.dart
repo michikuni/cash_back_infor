@@ -48,7 +48,9 @@ class _SignupWidgetState extends State<SignupWidget> {
                         text: 'đăng ký',
                         textButton: 'Đăng nhập',
                         onContinue: () {
-                          context.read<SignupCubit>().nextStep();
+                          if(state.step == SignupStep.password){
+                            context.go('/welcome');
+                          } else {context.read<SignupCubit>().nextStep();}
                         },
                         onChangedSign: () {
                           context.go('/');

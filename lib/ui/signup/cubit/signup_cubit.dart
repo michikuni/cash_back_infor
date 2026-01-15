@@ -1,4 +1,5 @@
 import 'package:cash_back_infor/ui/signup/form/confirm_password_input.dart';
+import 'package:cash_back_infor/ui/signup/form/name_input.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'signup_state.dart';
@@ -31,6 +32,14 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(
       confirmPassword: confirmPassword,
       isValid: Formz.validate([confirmPassword])
+    ));
+  }
+
+  void nameChanged(String value){
+    final name = NameInput.dirty(value);
+    emit(state.copyWith(
+      name: name,
+      isValid: Formz.validate([name])
     ));
   }
 
