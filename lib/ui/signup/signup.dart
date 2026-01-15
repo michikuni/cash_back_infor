@@ -1,6 +1,6 @@
 import 'cubit/signup_state.dart';
 import 'cubit/signup_cubit.dart';
-import 'package:country_code_picker/country_code_picker.dart';
+import 'components/header_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -30,11 +30,9 @@ class _SignupWidgetState extends State<SignupWidget> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      _HeaderSection(),
-                      const SizedBox(height: 21),
-                      _PhoneInputSection(
-                        isValid: state.phone.isValid,
-                      ),
+                      _HeaderSection(isValid: state.isValid,onChanged: (value) {
+                        context.read<SignupCubit>().phoneChanged(value);
+                      },),
                       if (state.phone.isValid)
                         Align(
                           alignment: Alignment.centerLeft,
@@ -70,6 +68,10 @@ class _SignupWidgetState extends State<SignupWidget> {
 }
 
 class _HeaderSection extends StatelessWidget {
+  final bool isValid;
+  final ValueChanged<String> onChanged;
+
+  const _HeaderSection({required this.isValid, required this.onChanged});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -80,69 +82,8 @@ class _HeaderSection extends StatelessWidget {
           child: Image.asset('assets/image/monkey.png', width: 151),
         ),
         const SizedBox(height: 11),
-        Text(
-          'Nhập số điện thoại',
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
+        PhoneInputSection(isValid: isValid, onChanged: onChanged)
       ],
-    );
-  }
-}
-
-class _PhoneInputSection extends StatelessWidget {
-  final bool isValid;
-
-  const _PhoneInputSection({
-    required this.isValid,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 62,
-      decoration: BoxDecoration(
-        border: Border.all(color: isValid ? Color(0xFF92C73D) : Colors.grey),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 80,
-            child: CountryCodePicker(
-              initialSelection: 'VN',
-              showFlag: true,
-              flagWidth: 28,
-              hideMainText: true,
-              showDropDownButton: true,
-              padding: EdgeInsets.zero,
-              margin: EdgeInsets.zero,
-            ),
-          ),
-          const VerticalDivider(width: 1, indent: 16, endIndent: 16),
-          const SizedBox(width: 4),
-
-          Expanded(
-            child: TextFormField(
-              keyboardType: TextInputType.phone,
-              textAlign: TextAlign.start,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Số điện thoại',
-                errorStyle: TextStyle(height: 0),
-                hintStyle: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
-                suffixIcon: isValid
-                    ? const Icon(Icons.check_circle, color: Colors.green)
-                    : null,
-              ),
-              onChanged: (value) {
-                context.read<SignupCubit>().phoneChanged(value);
-              },
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

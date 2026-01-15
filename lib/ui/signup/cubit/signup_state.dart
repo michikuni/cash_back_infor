@@ -5,6 +5,13 @@
     const SignupFormValidationState();
   }
 
+  enum SignupStep {
+  phone,
+  password,
+  confirmPassword,
+}
+
+
   class SignupState extends SignupFormValidationState{
     final PhoneInput phone;
     final FormzSubmissionStatus status;
