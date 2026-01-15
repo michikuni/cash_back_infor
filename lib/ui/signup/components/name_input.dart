@@ -3,16 +3,19 @@ import 'package:cash_back_infor/ui/signup/cubit/signup_state.dart';
 import 'package:cash_back_infor/ui/utils/button_primary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class NameInputWidget extends StatelessWidget {
   const NameInputWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignupCubit(),
+    return BlocProvider.value(
+      value: context.read<SignupCubit>(),
       child: Scaffold(
-        appBar: AppBar(leading: Icon(Icons.arrow_back_ios_new_rounded)),
+        appBar: AppBar(leading: IconButton(icon: Icon(Icons.arrow_back_ios_new_rounded), onPressed: () {
+          context.pop();
+        },)),
         body: BlocBuilder<SignupCubit, SignupState>(
           builder: (context, state) {
             return SafeArea(
@@ -25,6 +28,9 @@ class NameInputWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Image.asset('assets/image/name_input.png'),
+                        const SizedBox(
+                          width: 8,
+                        ),
                         Text(
                           'Tên của bé là?',
                           style: Theme.of(context).textTheme.titleSmall
@@ -68,7 +74,7 @@ class NameInputWidget extends StatelessWidget {
                       ),
                     ),
                     Expanded(child: Container()),
-                    PrimaryButton(text: 'Tiếp tục', onPressed: () {}),
+                    PrimaryButton(text: 'Tiếp tục', onPressed: () {context.push('/birth-selection');}, enabled: state.name.isValid ? true : false,),
                     SizedBox(height: 34),
                   ],
                 ),

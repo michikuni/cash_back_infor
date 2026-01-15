@@ -16,54 +16,62 @@ class _SignupWidgetState extends State<SignupWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignupCubit(),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(leading: Icon(Icons.arrow_back_ios_rounded)),
-        body: BlocBuilder<SignupCubit, SignupState>(
-          builder: (context, state) {
-            return SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      _HeaderSection(
-                        state: state,
-                        onPhoneChanged: (value) {
-                          context.read<SignupCubit>().phoneChanged(value);
-                        },
-                        onPasswordChanged: (value) {
-                          context.read<SignupCubit>().passwordChanged(value);
-                        },
-                        onCfPasswordChanged: (value) {
-                          context.read<SignupCubit>().confirmPasswordChanged(value);
-                        },
-                      ),
-                      Expanded(child: Container()),
-                      BottomActionSection(
-                        button: 'Tiếp tục',
-                        text: 'đăng ký',
-                        textButton: 'Đăng nhập',
-                        onContinue: () {
-                          if(state.step == SignupStep.password){
-                            context.go('/welcome');
-                          } else {context.read<SignupCubit>().nextStep();}
-                        },
-                        onChangedSign: () {
-                          context.go('/');
-                        },
-                        state: context.read<SignupCubit>().buttonState()
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_rounded),
+          onPressed: () {
+            context.pop();
           },
         ),
+      ),
+      body: BlocBuilder<SignupCubit, SignupState>(
+        builder: (context, state) {
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    _HeaderSection(
+                      state: state,
+                      onPhoneChanged: (value) {
+                        context.read<SignupCubit>().phoneChanged(value);
+                      },
+                      onPasswordChanged: (value) {
+                        context.read<SignupCubit>().passwordChanged(value);
+                      },
+                      onCfPasswordChanged: (value) {
+                        context.read<SignupCubit>().confirmPasswordChanged(
+                          value,
+                        );
+                      },
+                    ),
+                    Expanded(child: Container()),
+                    BottomActionSection(
+                      button: 'Tiếp tục',
+                      text: 'đăng ký',
+                      textButton: 'Đăng nhập',
+                      onContinue: () {
+                        if (state.step == SignupStep.password) {
+                          context.push('/welcome');
+                        } else {
+                          context.read<SignupCubit>().nextStep();
+                        }
+                      },
+                      onChangedSign: () {
+                        context.pop();
+                      },
+                      state: context.read<SignupCubit>().buttonState(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

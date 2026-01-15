@@ -1,5 +1,6 @@
 import 'package:cash_back_infor/ui/utils/button_primary.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class WelcomeWidget extends StatelessWidget {
   const WelcomeWidget({super.key});
@@ -25,7 +26,7 @@ class WelcomeWidget extends StatelessWidget {
             ),
             Image.asset('assets/image/welcome.png'),
             SizedBox(height: 60,),
-            PrimaryButton(text: 'Tiếp tục', onPressed: (){})
+            PrimaryButton(text: 'Tiếp tục', onPressed: (){context.push('/name-input');})
           ],
         ),
       ),
