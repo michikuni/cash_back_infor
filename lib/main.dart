@@ -1,5 +1,6 @@
 import 'package:cash_back_infor/ui/signin/signin.dart';
 import 'package:cash_back_infor/ui/test.dart';
+import 'package:cash_back_infor/ui/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'ui/cashback/cash_back_info.dart';
@@ -11,7 +12,7 @@ void main() {
 }
 
 final GoRouter _router = GoRouter(
-  initialLocation: '/sign-up',
+  initialLocation: '/welcome',
   routes: [
     GoRoute(path: '/test', builder: (context, state) {
       final String name = state.extra as String;
@@ -19,7 +20,8 @@ final GoRouter _router = GoRouter(
     },),
     GoRoute(path: '/', builder: (context, state) => const SigninWidget(),),
     GoRoute(path: '/sign-up', builder: (context, state) => const SignupWidget(),),
-    GoRoute(path: '/cash-back', builder: (context, state) => const CashBackWidget(),)
+    GoRoute(path: '/cash-back', builder: (context, state) => const CashBackWidget(),),
+    GoRoute(path: '/welcome', builder: (context, state) => const WelcomeWidget(),)
 
   ],
 );
@@ -39,7 +41,8 @@ class MonkeyApp extends StatelessWidget {
           bodyLarge: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
           bodyMedium: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
           bodySmall: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
-          labelMedium: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w800))
+          labelMedium: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
+          titleMedium: GoogleFonts.nunito(textStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.w900))
         )
 
       ),
