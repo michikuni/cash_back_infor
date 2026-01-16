@@ -5,9 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class BirthSelectionWidget extends StatelessWidget {
+class BirthSelectionWidget extends StatefulWidget {
   const BirthSelectionWidget({super.key});
 
+  @override
+  State<BirthSelectionWidget> createState() => _BirthSelectionWidgetState();
+}
+
+class _BirthSelectionWidgetState extends State<BirthSelectionWidget> {
+  int? selectedIndex;
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -25,7 +31,7 @@ class BirthSelectionWidget extends StatelessWidget {
           builder: (context, state) {
             return SafeArea(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 23),
+                padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -46,35 +52,54 @@ class BirthSelectionWidget extends StatelessWidget {
                     ),
                     SizedBox(height: 24),
                     GridView.builder(
-                      shrinkWrap:
-                          true, //GridView nằm gọn trong Column
+                      shrinkWrap: true, 
                       physics:
-                          NeverScrollableScrollPhysics(), // Tắt cuộn riêng của Grid nếu bọc ngoài bởi SingleChildScrollView
+                          NeverScrollableScrollPhysics(), 
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4, // 4 cột
-                        crossAxisSpacing: 10, // Khoảng cách ngang giữa các ô
-                        mainAxisSpacing: 10, // Khoảng cách dọc giữa các ô
-                        childAspectRatio:
-                            1.2,
+                        crossAxisCount: 4, 
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8, 
+                        childAspectRatio: 1.2,
                       ),
                       itemCount: 12,
                       itemBuilder: (context, index) {
                         int year = 2021 - index;
-                        return _buildYearButton(year.toString());
+                        final isSelected = selectedIndex == year;
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              selectedIndex = year;
+                              context.read<SignupCubit>().birthSelected(year);
+                            });
+                          },
+                          child: _buildYearButton(year.toString(), isSelected),
+                        );
                       },
                     ),
 
-                    const SizedBox(
-                      height: 10,
-                    ), 
-                    _buildYearButton('Sinh trước năm 2010', isFullWidth: true),
+                    const SizedBox(height: 12),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = 2009;
+                          context.read<SignupCubit>().birthSelected(2009);
+                        });
+                      },
+                      child: _buildYearButton(
+                        'Sinh trước năm 2010',
+                        selectedIndex == 2009,
+                        isFullWidth: true,
+                      ),
+                    ),
                     Expanded(child: Container()),
                     PrimaryButton(
                       text: 'Tiếp tục',
-                      onPressed: () {},
-                      enabled: state.name.isValid ? true : false,
+                      onPressed: () {
+                        context.push('/');
+                      },
+                      enabled: (selectedIndex != null),
                     ),
-                    SizedBox(height: 34),
+                    SizedBox(height: 32),
                   ],
                 ),
               ),
@@ -86,19 +111,23 @@ class BirthSelectionWidget extends StatelessWidget {
   }
 }
 
-Widget _buildYearButton(String text, {bool isFullWidth = false}) {
+Widget _buildYearButton(
+  String text,
+  bool isSelected, 
+  {bool isFullWidth = false,}
+  ) {
   return Container(
     width: isFullWidth ? double.infinity : null,
     height: isFullWidth ? 60 : null,
     alignment: Alignment.center,
     decoration: BoxDecoration(
-      color: Colors.white,
-      border: Border.all(color: Color(0xFFE0E0E0)), 
+      color: isSelected ? Color(0xFFEDF9FF) : Colors.white,
+      border: Border.all(color: isSelected ? Color(0xFF60A5FA) : Color(0xFFE5E5E5)),
       borderRadius: BorderRadius.circular(12),
     ),
     child: Text(
       text,
-      style: TextStyle(color: Color(0xFF4B4B4B), fontWeight: FontWeight.w600),
+      style: TextStyle(color: isSelected ? Color(0xFF36BFFA) : Color(0xFF777777), fontWeight: FontWeight.w700),
     ),
   );
 }

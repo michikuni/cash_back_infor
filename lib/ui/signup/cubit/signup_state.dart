@@ -8,9 +8,8 @@ abstract class SignupFormValidationState {
   const SignupFormValidationState();
 }
 
-enum SignupStep { phone, password, nameInput, birthSelection, englishLevel }
-
-enum EnglishLevel { unknown, word, sentence, paragraph }
+enum SignupStep { phone, password}
+enum EnglishLevel { unknown, word, sentence, paragraph, unselected }
 
 class SignupState extends SignupFormValidationState {
   final SignupStep step;
@@ -30,7 +29,7 @@ class SignupState extends SignupFormValidationState {
     this.phone = const PhoneInput.pure(),
     this.name = const NameInput.pure(),
     this.birthSelection = 2010,
-    this.englishLevel = EnglishLevel.word,
+    this.englishLevel = EnglishLevel.unselected,
     this.isValid = false,
     this.status = FormzSubmissionStatus.initial,
   });
@@ -65,12 +64,6 @@ class SignupState extends SignupFormValidationState {
         return phone.isValid;
       case SignupStep.password:
         return password.isValid;
-      case SignupStep.nameInput:
-        return name.isValid;
-      case SignupStep.birthSelection:
-        return true;
-      case SignupStep.englishLevel:
-        return true;
     }
   }
 }

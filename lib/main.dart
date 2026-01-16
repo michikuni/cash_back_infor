@@ -1,6 +1,7 @@
 import 'package:cash_back_infor/ui/signin/signin.dart';
 import 'package:cash_back_infor/ui/signup/components/birth_selection.dart';
-import 'package:cash_back_infor/ui/signup/components/infor_header_section.dart';
+import 'package:cash_back_infor/ui/signup/components/english_level_selection.dart';
+import 'package:cash_back_infor/ui/signup/components/name_input.dart';
 import 'package:cash_back_infor/ui/signup/cubit/signup_cubit.dart';
 import 'package:cash_back_infor/ui/test.dart';
 import 'package:cash_back_infor/ui/signup/components/welcome.dart';
@@ -16,7 +17,7 @@ void main() {
 }
 
 final GoRouter _router = GoRouter(
-  initialLocation: '/sign-up',
+  initialLocation: '/english-level',
   routes: [
     GoRoute(
       path: '/test',
@@ -28,10 +29,7 @@ final GoRouter _router = GoRouter(
     GoRoute(path: '/', builder: (context, state) => const SigninWidget()),
     ShellRoute(
       builder: (context, state, child) {
-        return BlocProvider(
-          create: (_) => SignupCubit(),
-          child: child,
-        );
+        return BlocProvider(create: (_) => SignupCubit(), child: child);
       },
       routes: [
         GoRoute(
@@ -49,6 +47,10 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: '/welcome',
           builder: (context, state) => const WelcomeWidget(),
+        ),
+        GoRoute(
+          path: '/english-level',
+          builder: (context, state) => const EnglishLevelSelectionWidget(),
         ),
       ],
     ),

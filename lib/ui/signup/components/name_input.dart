@@ -13,9 +13,14 @@ class NameInputWidget extends StatelessWidget {
     return BlocProvider.value(
       value: context.read<SignupCubit>(),
       child: Scaffold(
-        appBar: AppBar(leading: IconButton(icon: Icon(Icons.arrow_back_ios_new_rounded), onPressed: () {
-          context.pop();
-        },)),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new_rounded),
+            onPressed: () {
+              context.pop();
+            },
+          ),
+        ),
         body: BlocBuilder<SignupCubit, SignupState>(
           builder: (context, state) {
             return SafeArea(
@@ -28,9 +33,7 @@ class NameInputWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Image.asset('assets/image/name_input.png'),
-                        const SizedBox(
-                          width: 8,
-                        ),
+                        const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             maxLines: null,
@@ -77,7 +80,13 @@ class NameInputWidget extends StatelessWidget {
                       ),
                     ),
                     Expanded(child: Container()),
-                    PrimaryButton(text: 'Tiếp tục', onPressed: () {context.push('/birth-selection');}, enabled: state.name.isValid ? true : false,),
+                    PrimaryButton(
+                      text: 'Tiếp tục',
+                      onPressed: () {
+                        context.push('/birth-selection');
+                      },
+                      enabled: state.name.isValid ? true : false,
+                    ),
                     SizedBox(height: 34),
                   ],
                 ),
