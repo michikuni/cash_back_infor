@@ -1,6 +1,6 @@
 import 'cubit/signup_state.dart';
 import 'cubit/signup_cubit.dart';
-import 'components/header_section.dart';
+import 'components/signup_header_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -136,5 +136,11 @@ Widget _buildInput(
           ),
         ],
       );
+    case SignupStep.nameInput:
+      return Container();
+    case SignupStep.birthSelection:
+      return Container();
+    case SignupStep.englishLevel:
+      return Container();
   }
 }

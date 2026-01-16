@@ -1,6 +1,6 @@
 import 'package:cash_back_infor/ui/signin/signin.dart';
 import 'package:cash_back_infor/ui/signup/components/birth_selection.dart';
-import 'package:cash_back_infor/ui/signup/components/name_input.dart';
+import 'package:cash_back_infor/ui/signup/components/infor_header_section.dart';
 import 'package:cash_back_infor/ui/signup/cubit/signup_cubit.dart';
 import 'package:cash_back_infor/ui/test.dart';
 import 'package:cash_back_infor/ui/signup/components/welcome.dart';

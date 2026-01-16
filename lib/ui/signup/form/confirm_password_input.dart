@@ -6,8 +6,9 @@ class ConfirmPasswordInput extends FormzInput<String, ConfirmPasswordValidationE
   final String password;
   const ConfirmPasswordInput.pure({this.password = ''}) : super.pure('');
   const ConfirmPasswordInput.dirty({required this.password, String value = ''}) : super.dirty(value);
+  static final passwordRegExp = RegExp(r'^.{6,}$');
   @override
   ConfirmPasswordValidationError? validator(String value) {
-    return (value == password && value.isNotEmpty) ? null : ConfirmPasswordValidationError.invalid;
+    return (value == password && passwordRegExp.hasMatch(value)) ? null : ConfirmPasswordValidationError.invalid;
   }
 }

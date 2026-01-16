@@ -8,7 +8,9 @@ abstract class SignupFormValidationState {
   const SignupFormValidationState();
 }
 
-enum SignupStep { phone, password }
+enum SignupStep { phone, password, nameInput, birthSelection, englishLevel }
+
+enum EnglishLevel { unknown, word, sentence, paragraph }
 
 class SignupState extends SignupFormValidationState {
   final SignupStep step;
@@ -16,6 +18,8 @@ class SignupState extends SignupFormValidationState {
   final PasswordInput password;
   final ConfirmPasswordInput confirmPassword;
   final NameInput name;
+  final int birthSelection;
+  final EnglishLevel englishLevel;
   final FormzSubmissionStatus status;
   final bool isValid;
 
@@ -25,6 +29,8 @@ class SignupState extends SignupFormValidationState {
     this.confirmPassword = const ConfirmPasswordInput.pure(),
     this.phone = const PhoneInput.pure(),
     this.name = const NameInput.pure(),
+    this.birthSelection = 2010,
+    this.englishLevel = EnglishLevel.word,
     this.isValid = false,
     this.status = FormzSubmissionStatus.initial,
   });
@@ -35,6 +41,8 @@ class SignupState extends SignupFormValidationState {
     PasswordInput? password,
     ConfirmPasswordInput? confirmPassword,
     NameInput? name,
+    int? birthSelection,
+    EnglishLevel? englishLevel,
     bool? isValid,
     FormzSubmissionStatus? status,
   }) {
@@ -44,6 +52,8 @@ class SignupState extends SignupFormValidationState {
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
       name: name ?? this.name,
+      birthSelection: birthSelection ?? this.birthSelection,
+      englishLevel: englishLevel ?? this.englishLevel,
       isValid: isValid ?? this.isValid,
       status: status ?? this.status,
     );
@@ -55,6 +65,12 @@ class SignupState extends SignupFormValidationState {
         return phone.isValid;
       case SignupStep.password:
         return password.isValid;
+      case SignupStep.nameInput:
+        return name.isValid;
+      case SignupStep.birthSelection:
+        return true;
+      case SignupStep.englishLevel:
+        return true;
     }
   }
 }

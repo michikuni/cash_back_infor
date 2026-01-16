@@ -43,12 +43,27 @@ class SignupCubit extends Cubit<SignupState> {
     ));
   }
 
+  void birthSelected(int birth){
+    emit(state.copyWith(
+      birthSelection: birth
+    ));
+  }
+
+  void englishLevel(EnglishLevel englishLevel){
+    emit(state.copyWith(
+      englishLevel: englishLevel
+    ));
+  }
+
   void nextStep(){
     if(!state.isStepValid) return;
 
     switch(state.step){
       case SignupStep.phone: emit(state.copyWith(step: SignupStep.password)); break;
       case SignupStep.password: break;
+      case SignupStep.nameInput: emit(state.copyWith(step: SignupStep.birthSelection)); break;
+      case SignupStep.birthSelection: emit(state.copyWith(step: SignupStep.englishLevel)); break;
+      case SignupStep.englishLevel: break;
     }
   }
 

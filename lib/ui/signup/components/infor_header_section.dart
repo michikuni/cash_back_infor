@@ -31,10 +31,13 @@ class NameInputWidget extends StatelessWidget {
                         const SizedBox(
                           width: 8,
                         ),
-                        Text(
-                          'Tên của bé là?',
-                          style: Theme.of(context).textTheme.titleSmall
-                              ?.copyWith(color: Color(0xFF4B4B4B)),
+                        Expanded(
+                          child: Text(
+                            maxLines: null,
+                            'Tên của bé là?',
+                            style: Theme.of(context).textTheme.titleSmall
+                                ?.copyWith(color: Color(0xFF4B4B4B)),
+                          ),
                         ),
                       ],
                     ),
