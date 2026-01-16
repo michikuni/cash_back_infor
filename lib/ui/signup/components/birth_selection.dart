@@ -95,7 +95,7 @@ class _BirthSelectionWidgetState extends State<BirthSelectionWidget> {
                     PrimaryButton(
                       text: 'Tiếp tục',
                       onPressed: () {
-                        context.push('/');
+                        context.push('/english-level');
                       },
                       enabled: (selectedIndex != null),
                     ),

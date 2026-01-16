@@ -1,6 +1,10 @@
+import 'package:cash_back_infor/di/setup.dart';
+import 'package:cash_back_infor/domain/usecase/create_user_use_case.dart';
+import 'package:cash_back_infor/domain/usecase/get_user_use_case.dart';
 import 'package:cash_back_infor/ui/signin/signin.dart';
 import 'package:cash_back_infor/ui/signup/components/birth_selection.dart';
 import 'package:cash_back_infor/ui/signup/components/english_level_selection.dart';
+import 'package:cash_back_infor/ui/signup/components/loading_screen.dart';
 import 'package:cash_back_infor/ui/signup/components/name_input.dart';
 import 'package:cash_back_infor/ui/signup/cubit/signup_cubit.dart';
 import 'package:cash_back_infor/ui/test.dart';
@@ -13,11 +17,12 @@ import 'ui/signup/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
+  setup();
   runApp(const MonkeyApp());
 }
 
 final GoRouter _router = GoRouter(
-  initialLocation: '/english-level',
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/test',
@@ -29,7 +34,13 @@ final GoRouter _router = GoRouter(
     GoRoute(path: '/', builder: (context, state) => const SigninWidget()),
     ShellRoute(
       builder: (context, state, child) {
-        return BlocProvider(create: (_) => SignupCubit(), child: child);
+        return BlocProvider(
+          create: (_) => SignupCubit(
+            getUserUseCase: getIt<GetUserUseCase>(),
+            createUserUseCase: getIt<CreateUserUseCase>(),
+          ),
+          child: child,
+        );
       },
       routes: [
         GoRoute(
@@ -53,6 +64,10 @@ final GoRouter _router = GoRouter(
           builder: (context, state) => const EnglishLevelSelectionWidget(),
         ),
       ],
+    ),
+    GoRoute(
+      path: '/loading',
+      builder: (context, state) => const LoadingWidget(),
     ),
     GoRoute(
       path: '/cash-back',

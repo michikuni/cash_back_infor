@@ -3,6 +3,7 @@ import 'package:cash_back_infor/ui/signup/cubit/signup_state.dart';
 import 'package:cash_back_infor/ui/utils/button_primary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 
 class EnglishLevelSelectionWidget extends StatefulWidget {
@@ -55,18 +56,24 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                     InkWell(
                       onTap: () {
                         setState(() {
-                          context.read<SignupCubit>().englishLevel(EnglishLevel.unknown);
+                          context.read<SignupCubit>().englishLevel(
+                            EnglishLevel.unknown,
+                          );
                         });
                       },
                       child: Container(
                         height: 88,
                         decoration: BoxDecoration(
                           border: BoxBorder.all(
-                            color: (state.englishLevel == EnglishLevel.unknown) ? Color(0xFF36BFFA) : Color(0xFFE5E5E5),
+                            color: (state.englishLevel == EnglishLevel.unknown)
+                                ? Color(0xFF36BFFA)
+                                : Color(0xFFE5E5E5),
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(12),
-                          color: (state.englishLevel == EnglishLevel.unknown) ? Color(0xFFF8FDFF) : Colors.white,
+                          color: (state.englishLevel == EnglishLevel.unknown)
+                              ? Color(0xFFF8FDFF)
+                              : Colors.white,
                         ),
                         padding: EdgeInsets.symmetric(horizontal: 24),
                         alignment: Alignment.center,
@@ -81,7 +88,13 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                                 maxLines: null,
                                 'Bé chưa biết gì về tiếng Anh',
                                 style: Theme.of(context).textTheme.bodySmall
-                                    ?.copyWith(color: (state.englishLevel == EnglishLevel.unknown) ? Color(0xFF36BFFA) : Color(0xFF4B4B4B)),
+                                    ?.copyWith(
+                                      color:
+                                          (state.englishLevel ==
+                                              EnglishLevel.unknown)
+                                          ? Color(0xFF36BFFA)
+                                          : Color(0xFF4B4B4B),
+                                    ),
                               ),
                             ),
                           ],
@@ -92,18 +105,24 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                     InkWell(
                       onTap: () {
                         setState(() {
-                          context.read<SignupCubit>().englishLevel(EnglishLevel.word);
+                          context.read<SignupCubit>().englishLevel(
+                            EnglishLevel.word,
+                          );
                         });
                       },
                       child: Container(
                         height: 88,
                         decoration: BoxDecoration(
                           border: BoxBorder.all(
-                            color: (state.englishLevel == EnglishLevel.word) ? Color(0xFF36BFFA) : Color(0xFFE5E5E5),
+                            color: (state.englishLevel == EnglishLevel.word)
+                                ? Color(0xFF36BFFA)
+                                : Color(0xFFE5E5E5),
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(12),
-                          color: (state.englishLevel == EnglishLevel.word) ? Color(0xFFF8FDFF) : Colors.white,
+                          color: (state.englishLevel == EnglishLevel.word)
+                              ? Color(0xFFF8FDFF)
+                              : Colors.white,
                         ),
                         padding: EdgeInsets.symmetric(horizontal: 24),
                         alignment: Alignment.center,
@@ -118,7 +137,13 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                                 maxLines: null,
                                 'Bé nhận biết được vài từ đơn giản',
                                 style: Theme.of(context).textTheme.bodySmall
-                                    ?.copyWith(color: (state.englishLevel == EnglishLevel.word) ? Color(0xFF36BFFA) : Color(0xFF4B4B4B)),
+                                    ?.copyWith(
+                                      color:
+                                          (state.englishLevel ==
+                                              EnglishLevel.word)
+                                          ? Color(0xFF36BFFA)
+                                          : Color(0xFF4B4B4B),
+                                    ),
                               ),
                             ),
                           ],
@@ -129,18 +154,24 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                     InkWell(
                       onTap: () {
                         setState(() {
-                          context.read<SignupCubit>().englishLevel(EnglishLevel.sentence);
+                          context.read<SignupCubit>().englishLevel(
+                            EnglishLevel.sentence,
+                          );
                         });
                       },
                       child: Container(
                         height: 88,
                         decoration: BoxDecoration(
                           border: BoxBorder.all(
-                            color: (state.englishLevel == EnglishLevel.sentence) ? Color(0xFF36BFFA) : Color(0xFFE5E5E5),
+                            color: (state.englishLevel == EnglishLevel.sentence)
+                                ? Color(0xFF36BFFA)
+                                : Color(0xFFE5E5E5),
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(12),
-                          color: (state.englishLevel == EnglishLevel.sentence) ? Color(0xFFF8FDFF) : Colors.white,
+                          color: (state.englishLevel == EnglishLevel.sentence)
+                              ? Color(0xFFF8FDFF)
+                              : Colors.white,
                         ),
                         padding: EdgeInsets.symmetric(horizontal: 24),
                         alignment: Alignment.center,
@@ -155,7 +186,13 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                                 maxLines: null,
                                 'Bé hiểu được câu ngắn, đơn giản',
                                 style: Theme.of(context).textTheme.bodySmall
-                                    ?.copyWith(color: (state.englishLevel == EnglishLevel.sentence) ? Color(0xFF36BFFA) : Color(0xFF4B4B4B)),
+                                    ?.copyWith(
+                                      color:
+                                          (state.englishLevel ==
+                                              EnglishLevel.sentence)
+                                          ? Color(0xFF36BFFA)
+                                          : Color(0xFF4B4B4B),
+                                    ),
                               ),
                             ),
                           ],
@@ -166,18 +203,25 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                     InkWell(
                       onTap: () {
                         setState(() {
-                          context.read<SignupCubit>().englishLevel(EnglishLevel.paragraph);
+                          context.read<SignupCubit>().englishLevel(
+                            EnglishLevel.paragraph,
+                          );
                         });
                       },
                       child: Container(
                         height: 88,
                         decoration: BoxDecoration(
                           border: BoxBorder.all(
-                            color: (state.englishLevel == EnglishLevel.paragraph) ? Color(0xFF36BFFA) : Color(0xFFE5E5E5),
+                            color:
+                                (state.englishLevel == EnglishLevel.paragraph)
+                                ? Color(0xFF36BFFA)
+                                : Color(0xFFE5E5E5),
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(12),
-                          color: (state.englishLevel == EnglishLevel.paragraph) ? Color(0xFFF8FDFF) : Colors.white,
+                          color: (state.englishLevel == EnglishLevel.paragraph)
+                              ? Color(0xFFF8FDFF)
+                              : Colors.white,
                         ),
                         padding: EdgeInsets.symmetric(horizontal: 24),
                         alignment: Alignment.center,
@@ -192,7 +236,13 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                                 maxLines: null,
                                 'Bé đọc hiểu đoạn văn ngắn',
                                 style: Theme.of(context).textTheme.bodySmall
-                                    ?.copyWith(color: (state.englishLevel == EnglishLevel.paragraph) ? Color(0xFF36BFFA) : Color(0xFF4B4B4B)),
+                                    ?.copyWith(
+                                      color:
+                                          (state.englishLevel ==
+                                              EnglishLevel.paragraph)
+                                          ? Color(0xFF36BFFA)
+                                          : Color(0xFF4B4B4B),
+                                    ),
                               ),
                             ),
                           ],
@@ -201,12 +251,31 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                     ),
                     SizedBox(height: 12),
                     Expanded(child: Container()),
-                    PrimaryButton(
-                      text: 'Tiếp tục',
-                      onPressed: () {
-                        context.push('/');
+                    BlocListener<SignupCubit, SignupState>(
+                      listenWhen: (prev, curr) => prev.status != curr.status,
+                      listener: (context, state) {
+                        if(state.status == FormzSubmissionStatus.inProgress){
+                          context.push('/loading');
+                        }
+
+                        if (state.status == FormzSubmissionStatus.success) {
+                          context.go('/cash-back');
+                        }
+
+                        if (state.status == FormzSubmissionStatus.failure) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Đăng ký thất bại')),
+                          );
+                          context.go('/sign-up');
+                        }
                       },
-                      enabled: (state.englishLevel != EnglishLevel.unselected),
+                      child: PrimaryButton(
+                        text: 'Tiếp tục',
+                        onPressed: () {
+                          context.read<SignupCubit>().submit();
+                        },
+                        enabled: state.englishLevel != EnglishLevel.unselected,
+                      ),
                     ),
                     SizedBox(height: 32),
                   ],
