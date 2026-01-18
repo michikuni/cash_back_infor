@@ -19,6 +19,7 @@ class _BirthSelectionWidgetState extends State<BirthSelectionWidget> {
     return BlocProvider.value(
       value: context.read<SignupCubit>(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios_new_rounded),
@@ -52,13 +53,12 @@ class _BirthSelectionWidgetState extends State<BirthSelectionWidget> {
                     ),
                     SizedBox(height: 24),
                     GridView.builder(
-                      shrinkWrap: true, 
-                      physics:
-                          NeverScrollableScrollPhysics(), 
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4, 
+                        crossAxisCount: 4,
                         crossAxisSpacing: 8,
-                        mainAxisSpacing: 8, 
+                        mainAxisSpacing: 8,
                         childAspectRatio: 1.2,
                       ),
                       itemCount: 12,
@@ -113,21 +113,26 @@ class _BirthSelectionWidgetState extends State<BirthSelectionWidget> {
 
 Widget _buildYearButton(
   String text,
-  bool isSelected, 
-  {bool isFullWidth = false,}
-  ) {
+  bool isSelected, {
+  bool isFullWidth = false,
+}) {
   return Container(
     width: isFullWidth ? double.infinity : null,
     height: isFullWidth ? 60 : null,
     alignment: Alignment.center,
     decoration: BoxDecoration(
       color: isSelected ? Color(0xFFEDF9FF) : Colors.white,
-      border: Border.all(color: isSelected ? Color(0xFF60A5FA) : Color(0xFFE5E5E5)),
+      border: Border.all(
+        color: isSelected ? Color(0xFF60A5FA) : Color(0xFFE5E5E5),
+      ),
       borderRadius: BorderRadius.circular(12),
     ),
     child: Text(
       text,
-      style: TextStyle(color: isSelected ? Color(0xFF36BFFA) : Color(0xFF777777), fontWeight: FontWeight.w700),
+      style: TextStyle(
+        color: isSelected ? Color(0xFF36BFFA) : Color(0xFF777777),
+        fontWeight: FontWeight.w700,
+      ),
     ),
   );
 }

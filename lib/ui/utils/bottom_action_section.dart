@@ -1,30 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'button_primary.dart';
 
 class BottomActionSection extends StatelessWidget {
-  final VoidCallback onContinue;
   final VoidCallback onChangedSign;
   final String textButton;
   final String text;
-  final String button;
-  final bool state;
 
   const BottomActionSection({
     super.key,
-    required this.onContinue,
     required this.textButton,
     required this.text,
-    required this.button,
     required this.onChangedSign,
-    required this.state,
   });
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        PrimaryButton(text: button, onPressed: onContinue, enabled: state),
-        const SizedBox(height: 27),
         Row(
           children: [
             const Expanded(child: Divider()),

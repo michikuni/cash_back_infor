@@ -1,8 +1,8 @@
-import 'package:cash_back_infor/data/models/user.dart';
-import 'package:cash_back_infor/domain/usecase/create_user_use_case.dart';
-import 'package:cash_back_infor/domain/usecase/get_user_use_case.dart';
-import 'package:cash_back_infor/ui/signup/form/confirm_password_input.dart';
-import 'package:cash_back_infor/ui/signup/form/name_input.dart';
+import '../../../data/models/user.dart';
+import '../../../domain/usecase/create_user_use_case.dart';
+import '../../../domain/usecase/get_user_use_case.dart';
+import '../form/confirm_password_input.dart';
+import '../form/name_input.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'signup_state.dart';
@@ -80,7 +80,6 @@ class SignupCubit extends Cubit<SignupState> {
 
   void submit() async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    print(state.status);
     try {
       final user = UserModel(
         phone: state.phone.value,
@@ -91,10 +90,7 @@ class SignupCubit extends Cubit<SignupState> {
       );
       await createUserUseCase(user);
       emit(state.copyWith(status: FormzSubmissionStatus.success));
-      print(state.status);
-      print('ok');
     } catch (error) {
-      print("fail $error");
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
   }

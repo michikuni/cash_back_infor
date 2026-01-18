@@ -100,6 +100,9 @@ class MonkeyApp extends StatelessWidget {
           labelMedium: GoogleFonts.nunito(
             textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
           ),
+          labelSmall: GoogleFonts.nunito(
+            textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+          ),
           titleMedium: GoogleFonts.nunito(
             textStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.w900),
           ),

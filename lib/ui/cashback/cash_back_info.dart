@@ -44,7 +44,7 @@ class _CashBackWidget extends State<CashBackWidget> {
         leading: IconButton(
           icon: const Icon(FontAwesomeIcons.angleLeft),
           onPressed: () {
-            // Handle back button press
+            context.go('/');
           },
         ),
         elevation: 1,

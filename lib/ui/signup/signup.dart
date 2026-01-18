@@ -1,3 +1,5 @@
+import 'package:cash_back_infor/ui/utils/button_primary.dart';
+
 import 'cubit/signup_state.dart';
 import 'cubit/signup_cubit.dart';
 import 'components/header_section.dart';
@@ -13,7 +15,6 @@ class SignupWidget extends StatefulWidget {
 }
 
 class _SignupWidgetState extends State<SignupWidget> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +33,6 @@ class _SignupWidgetState extends State<SignupWidget> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
               child: Form(
-                key: _formKey,
                 child: Column(
                   children: [
                     _HeaderSection(
@@ -50,21 +50,24 @@ class _SignupWidgetState extends State<SignupWidget> {
                       },
                     ),
                     Expanded(child: Container()),
-                    BottomActionSection(
-                      button: 'Tiếp tục',
-                      text: 'đăng ký',
-                      textButton: 'Đăng nhập',
-                      onContinue: () {
+                    PrimaryButton(
+                      text: 'Tiếp tục',
+                      onPressed: () {
                         if (state.step == SignupStep.password) {
                           context.push('/welcome');
                         } else {
                           context.read<SignupCubit>().nextStep();
                         }
                       },
+                      enabled: context.read<SignupCubit>().buttonState(),
+                    ),
+                    const SizedBox(height: 27),
+                    BottomActionSection(
+                      text: 'đăng ký',
+                      textButton: 'Đăng nhập',
                       onChangedSign: () {
                         context.pop();
                       },
-                      state: context.read<SignupCubit>().buttonState(),
                     ),
                   ],
                 ),
