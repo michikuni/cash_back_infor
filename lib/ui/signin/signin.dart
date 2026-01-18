@@ -175,7 +175,9 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
               suffixIcon: IconButton(
                 constraints: const BoxConstraints(minHeight: 24, minWidth: 24),
                 padding: EdgeInsets.zero,
-                onPressed: () {},
+                onPressed: () {
+                  _phoneTextController.text = '';
+                },
                 icon: Icon(_hasPhoneText ? Icons.cancel : null),
               ),
             ),
