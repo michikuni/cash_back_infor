@@ -1,5 +1,8 @@
+import 'package:cash_back_infor/ui/utils/base_noti_dialog.dart';
+import 'package:cash_back_infor/ui/utils/button_primary.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class BottomActionSection extends StatelessWidget {
   final VoidCallback onChangedSign;
@@ -42,7 +45,21 @@ class BottomActionSection extends StatelessWidget {
                   color: Colors.white,
                 ),
                 onTap: () {
-                  print('Facebook tap');
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        BaseNotiDiaLogWidget(
+                          imageUrl: 'assets/image/login_noti.png',
+                          title: 'Đăng nhập bằng Facebook thất bại',
+                          height: 360,
+                          child: PrimaryButton(
+                            text: 'Tôi đã hiểu',
+                            onPressed: () {
+                              context.pop();
+                            },
+                          ),
+                        ),
+                  );
                 },
               ),
             ),
