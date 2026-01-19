@@ -21,96 +21,91 @@ class _SigninWidgetState extends State<SigninWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<SigninCubit, SigninState>(
       builder: (context, state) {
-        return Stack(
-          children: [
-            Scaffold(
-              resizeToAvoidBottomInset: false,
-              appBar: AppBar(leading: Icon(Icons.arrow_back_ios_new_rounded)),
-              body: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
-                  child: Form(
-                    child: Column(
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(leading: Icon(Icons.arrow_back_ios_new_rounded)),
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+              child: Form(
+                child: Column(
+                  children: [
+                    _HeaderSectionWidget(
+                      state: state,
+                      onPhoneChanged: (value) {
+                        setState(() {
+                          context.read<SigninCubit>().phoneChanged(value);
+                        });
+                      },
+                    ),
+                    BlocListener<SigninCubit, SigninState>(
+                      listenWhen: (previous, current) =>
+                          previous.status != current.status,
+                      listener: (context, state) {
+                        if (state.status == FormzSubmissionStatus.inProgress) {
+                          // context.push('/loading-signin');
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => const LoadingWidget(),
+                          );
+                        }
+                        if (state.status == FormzSubmissionStatus.success) {
+                          context.go('/home', extra: state.userData);
+                        }
+                        if (state.status == FormzSubmissionStatus.failure) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Đăng nhập thất bại')),
+                          );
+                          context.go('/cash-back');
+                        }
+                      },
+                      child: PrimaryButton(
+                        text: 'Đăng nhập',
+                        onPressed: () {
+                          context.read<SigninCubit>().submit();
+                        },
+                        enabled: true,
+                      ),
+                    ),
+                    SizedBox(height: 12),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _HeaderSectionWidget(
-                          state: state,
-                          onPhoneChanged: (value) {
-                            setState(() {
-                              context.read<SigninCubit>().phoneChanged(value);
-                            });
-                          },
+                        Text(
+                          'Nếu bạn có mã kích hoạt,',
+                          style: Theme.of(context).textTheme.labelMedium
+                              ?.copyWith(color: Color(0xFF777777)),
                         ),
-                        BlocListener<SigninCubit, SigninState>(
-                          listenWhen: (previous, current) =>
-                              previous.status != current.status,
-                          listener: (context, state) {
-                            // if (state.status ==
-                            //     FormzSubmissionStatus.inProgress) {
-                            //   context.push('/loading-signin');
-                            // }
-                            if (state.status == FormzSubmissionStatus.success) {
-                              context.go('/home', extra: state.userData);
-                            }
-                            if (state.status == FormzSubmissionStatus.failure) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Đăng nhập thất bại'),
+                        TextButton(
+                          style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                          onPressed: () {},
+                          child: Text(
+                            'Nhập tại đây',
+                            style: Theme.of(context).textTheme.labelMedium
+                                ?.copyWith(
+                                  color: Color(0xFF3393FF),
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Color(0xFF3393FF),
                                 ),
-                              );
-                              context.go('/cash-back');
-                            }
-                          },
-                          child: PrimaryButton(
-                            text: 'Đăng nhập',
-                            onPressed: () {
-                              context.read<SigninCubit>().submit();
-                            },
-                            enabled: true,
                           ),
-                        ),
-                        SizedBox(height: 12),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Nếu bạn có mã kích hoạt,',
-                              style: Theme.of(context).textTheme.labelMedium
-                                  ?.copyWith(color: Color(0xFF777777)),
-                            ),
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                              ),
-                              onPressed: () {},
-                              child: Text(
-                                'Nhập tại đây',
-                                style: Theme.of(context).textTheme.labelMedium
-                                    ?.copyWith(
-                                      color: Color(0xFF3393FF),
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: Color(0xFF3393FF),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Expanded(child: Container()),
-                        BottomActionSection(
-                          textButton: 'Đăng ký',
-                          text: 'đăng nhập',
-                          onChangedSign: () {
-                            context.push('/sign-up');
-                          },
                         ),
                       ],
                     ),
-                  ),
+                    Expanded(child: Container()),
+                    BottomActionSection(
+                      textButton: 'Đăng ký',
+                      text: 'đăng nhập',
+                      onChangedSign: () {
+                        context.push('/sign-up');
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),
-            if (state.status.isInProgress) LoadingWidget(),
-          ],
+          ),
         );
       },
     );

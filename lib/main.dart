@@ -8,8 +8,6 @@ import './domain/usecase/get_user_use_case.dart';
 import './ui/signin/signin.dart';
 import './ui/signup/components/birth_selection.dart';
 import './ui/signup/components/english_level_selection.dart';
-import './ui/signup/components/loading_screen.dart';
-// import './ui/signin/components/loading_screen.dart';
 import './ui/signup/components/name_input.dart';
 import './ui/signup/cubit/signup_cubit.dart';
 import './ui/test.dart';
@@ -80,10 +78,6 @@ final GoRouter _router = GoRouter(
           builder: (context, state) => const EnglishLevelSelectionWidget(),
         ),
       ],
-    ),
-    GoRoute(
-      path: '/loading',
-      builder: (context, state) => const FakeLoadingWidget(),
     ),
     GoRoute(
       path: '/cash-back',

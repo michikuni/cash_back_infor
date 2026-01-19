@@ -1,3 +1,4 @@
+import 'package:cash_back_infor/ui/signup/components/loading_screen.dart';
 import 'package:cash_back_infor/ui/signup/cubit/signup_cubit.dart';
 import 'package:cash_back_infor/ui/signup/cubit/signup_state.dart';
 import 'package:cash_back_infor/ui/utils/button_primary.dart';
@@ -254,8 +255,12 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                     BlocListener<SignupCubit, SignupState>(
                       listenWhen: (prev, curr) => prev.status != curr.status,
                       listener: (context, state) {
-                        if(state.status == FormzSubmissionStatus.inProgress){
-                          context.push('/loading');
+                        if (state.status == FormzSubmissionStatus.inProgress) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => const FakeLoadingWidget(),
+                          );
                         }
 
                         if (state.status == FormzSubmissionStatus.success) {
