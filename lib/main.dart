@@ -1,19 +1,24 @@
-import 'package:cash_back_infor/di/setup.dart';
-import 'package:cash_back_infor/domain/usecase/create_user_use_case.dart';
-import 'package:cash_back_infor/domain/usecase/get_user_use_case.dart';
-import 'package:cash_back_infor/ui/signin/signin.dart';
-import 'package:cash_back_infor/ui/signup/components/birth_selection.dart';
-import 'package:cash_back_infor/ui/signup/components/english_level_selection.dart';
-import 'package:cash_back_infor/ui/signup/components/loading_screen.dart';
-import 'package:cash_back_infor/ui/signup/components/name_input.dart';
-import 'package:cash_back_infor/ui/signup/cubit/signup_cubit.dart';
-import 'package:cash_back_infor/ui/test.dart';
-import 'package:cash_back_infor/ui/signup/components/welcome.dart';
+import 'package:cash_back_infor/domain/entity/user.dart';
+import 'package:cash_back_infor/ui/home/home.dart';
+import 'package:cash_back_infor/ui/signin/cubit/signin_cubit.dart';
+
+import './di/setup.dart';
+import './domain/usecase/create_user_use_case.dart';
+import './domain/usecase/get_user_use_case.dart';
+import './ui/signin/signin.dart';
+import './ui/signup/components/birth_selection.dart';
+import './ui/signup/components/english_level_selection.dart';
+import './ui/signup/components/loading_screen.dart';
+// import './ui/signin/components/loading_screen.dart';
+import './ui/signup/components/name_input.dart';
+import './ui/signup/cubit/signup_cubit.dart';
+import './ui/test.dart';
+import './ui/signup/components/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'ui/cashback/cash_back_info.dart';
-import 'ui/signup/signup.dart';
+import './ui/cashback/cash_back_info.dart';
+import './ui/signup/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -31,7 +36,18 @@ final GoRouter _router = GoRouter(
         return TestWidget(name: name);
       },
     ),
-    GoRoute(path: '/', builder: (context, state) => const SigninWidget()),
+    GoRoute(path: '/', builder: (context, state) => BlocProvider(
+        create: (_) => SigninCubit(getUserUseCase: getIt<GetUserUseCase>()),
+        child: const SigninWidget(),
+      ),),
+    GoRoute(
+      path: '/home',
+      builder: (context, state) {
+        final List<UserEntity> userData = state.extra as List<UserEntity>;
+        return HomeWidget(userData: userData);
+      },
+    ),
+    // GoRoute(path: '/loading-signin', builder: (context, state) => const LoadingWidget(),),
     ShellRoute(
       builder: (context, state, child) {
         return BlocProvider(
@@ -67,7 +83,7 @@ final GoRouter _router = GoRouter(
     ),
     GoRoute(
       path: '/loading',
-      builder: (context, state) => const LoadingWidget(),
+      builder: (context, state) => const FakeLoadingWidget(),
     ),
     GoRoute(
       path: '/cash-back',

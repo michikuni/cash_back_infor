@@ -66,7 +66,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                       text: 'đăng ký',
                       textButton: 'Đăng nhập',
                       onChangedSign: () {
-                        context.pop();
+                        context.go('/');
                       },
                     ),
                   ],

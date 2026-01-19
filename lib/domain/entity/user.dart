@@ -5,7 +5,7 @@ class UserEntity {
   final String password;
   final int dob;
   final String englishLevel;
-  UserEntity({
+  const UserEntity({
     required this.id,
     required this.phone,
     required this.name,

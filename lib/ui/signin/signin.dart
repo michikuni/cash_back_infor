@@ -1,11 +1,11 @@
-import 'package:cash_back_infor/di/setup.dart';
-import 'package:cash_back_infor/domain/usecase/get_user_use_case.dart';
+import 'package:cash_back_infor/ui/signin/components/loading_screen.dart';
 import 'package:cash_back_infor/ui/signin/cubit/signin_cubit.dart';
 import 'package:cash_back_infor/ui/signin/cubit/signin_state.dart';
 import 'package:cash_back_infor/ui/signin/form/phone_input.dart';
 import 'package:cash_back_infor/ui/utils/button_primary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import '../utils/bottom_action_section.dart';
 
@@ -19,75 +19,100 @@ class SigninWidget extends StatefulWidget {
 class _SigninWidgetState extends State<SigninWidget> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SigninCubit(getUserUseCase: getIt<GetUserUseCase>()),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(leading: Icon(Icons.arrow_back_ios_new_rounded)),
-        body: BlocBuilder<SigninCubit, SigninState>(
-          builder: (context, state) {
-            return SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
-                child: Form(
-                  child: Column(
-                    children: [
-                      _HeaderSectionWidget(
-                        state: state,
-                        onPhoneChanged: (value) {
-                          setState(() {
-                            context.read<SigninCubit>().phoneChanged(value);
-                          });
-                        },
-                      ),
-                      PrimaryButton(
-                        text: 'Đăng nhập',
-                        onPressed: () {},
-                        enabled: true,
-                      ),
-                      SizedBox(height: 12),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Nếu bạn có mã kích hoạt,',
-                            style: Theme.of(context).textTheme.labelMedium
-                                ?.copyWith(color: Color(0xFF777777)),
+    return BlocBuilder<SigninCubit, SigninState>(
+      builder: (context, state) {
+        return Stack(
+          children: [
+            Scaffold(
+              resizeToAvoidBottomInset: false,
+              appBar: AppBar(leading: Icon(Icons.arrow_back_ios_new_rounded)),
+              body: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+                  child: Form(
+                    child: Column(
+                      children: [
+                        _HeaderSectionWidget(
+                          state: state,
+                          onPhoneChanged: (value) {
+                            setState(() {
+                              context.read<SigninCubit>().phoneChanged(value);
+                            });
+                          },
+                        ),
+                        BlocListener<SigninCubit, SigninState>(
+                          listenWhen: (previous, current) =>
+                              previous.status != current.status,
+                          listener: (context, state) {
+                            // if (state.status ==
+                            //     FormzSubmissionStatus.inProgress) {
+                            //   context.push('/loading-signin');
+                            // }
+                            if (state.status == FormzSubmissionStatus.success) {
+                              context.go('/home', extra: state.userData);
+                            }
+                            if (state.status == FormzSubmissionStatus.failure) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Đăng nhập thất bại'),
+                                ),
+                              );
+                              context.go('/cash-back');
+                            }
+                          },
+                          child: PrimaryButton(
+                            text: 'Đăng nhập',
+                            onPressed: () {
+                              context.read<SigninCubit>().submit();
+                            },
+                            enabled: true,
                           ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                            ),
-                            onPressed: () {},
-                            child: Text(
-                              'Nhập tại đây',
+                        ),
+                        SizedBox(height: 12),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Nếu bạn có mã kích hoạt,',
                               style: Theme.of(context).textTheme.labelMedium
-                                  ?.copyWith(
-                                    color: Color(0xFF3393FF),
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: Color(0xFF3393FF),
-                                  ),
+                                  ?.copyWith(color: Color(0xFF777777)),
                             ),
-                          ),
-                        ],
-                      ),
-                      Expanded(child: Container()),
-                      BottomActionSection(
-                        textButton: 'Đăng ký',
-                        text: 'đăng nhập',
-                        onChangedSign: () {
-                          context.push('/sign-up');
-                        },
-                      ),
-                    ],
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                              ),
+                              onPressed: () {},
+                              child: Text(
+                                'Nhập tại đây',
+                                style: Theme.of(context).textTheme.labelMedium
+                                    ?.copyWith(
+                                      color: Color(0xFF3393FF),
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: Color(0xFF3393FF),
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Expanded(child: Container()),
+                        BottomActionSection(
+                          textButton: 'Đăng ký',
+                          text: 'đăng nhập',
+                          onChangedSign: () {
+                            context.push('/sign-up');
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            );
-          },
-        ),
-      ),
+            ),
+            if (state.status.isInProgress) LoadingWidget(),
+          ],
+        );
+      },
     );
   }
 }

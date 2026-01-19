@@ -10,6 +10,21 @@ class SigninCubit extends Cubit<SigninState> {
 
   void phoneChanged(String value) {
     final phone = PhoneInput.dirty(value);
-    emit(state.copyWith(phone: phone, isValid: Formz.validate([phone])));
+    emit(
+      state.copyWith(
+        phone: phone,
+        isValid: Formz.validate([phone]),
+      ),
+    );
+  }
+
+  void submit() async {
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    try{
+      final response = await getUserUseCase();
+      emit(state.copyWith(status: FormzSubmissionStatus.success, userData: response));
+    }catch(e){
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
+    }
   }
 }
