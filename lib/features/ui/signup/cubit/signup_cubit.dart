@@ -1,6 +1,6 @@
-import '../../../data/models/user.dart';
-import '../../../domain/usecase/create_user_use_case.dart';
-import '../../../domain/usecase/get_user_use_case.dart';
+import '../../../../data/models/user.dart';
+import '../../../../domain/usecase/create_user_use_case.dart';
+import '../../../../domain/usecase/get_user_use_case.dart';
 import '../form/confirm_password_input.dart';
 import '../form/name_input.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

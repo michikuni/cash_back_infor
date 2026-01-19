@@ -1,10 +1,10 @@
-import 'package:cash_back_infor/ui/signin/components/loading_screen.dart';
-import 'package:cash_back_infor/ui/signin/cubit/signin_cubit.dart';
-import 'package:cash_back_infor/ui/signin/cubit/signin_state.dart';
-import 'package:cash_back_infor/ui/signin/form/phone_input.dart';
-import 'package:cash_back_infor/ui/utils/button_primary.dart';
-import 'package:cash_back_infor/utils/color.dart';
-import 'package:cash_back_infor/utils/text_decoration_extension.dart';
+import 'package:cash_back_infor/features/ui/signin/components/loading_screen.dart';
+import 'package:cash_back_infor/features/ui/signin/cubit/signin_cubit.dart';
+import 'package:cash_back_infor/features/ui/signin/cubit/signin_state.dart';
+import 'package:cash_back_infor/features/ui/signin/form/phone_input.dart';
+import 'package:cash_back_infor/features/ui/utils/button_primary.dart';
+import 'package:cash_back_infor/features/theme/color_theme.dart';
+import 'package:cash_back_infor/features/theme/text_decoration.dart';
 import 'package:cash_back_infor/utils/text_define.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

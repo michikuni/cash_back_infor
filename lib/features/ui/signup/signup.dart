@@ -1,4 +1,4 @@
-import 'package:cash_back_infor/ui/utils/button_primary.dart';
+import 'package:cash_back_infor/features/ui/utils/button_primary.dart';
 import 'package:cash_back_infor/utils/text_define.dart';
 
 import 'cubit/signup_state.dart';

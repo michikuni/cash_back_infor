@@ -1,5 +1,5 @@
-import 'package:cash_back_infor/ui/utils/base_noti_dialog.dart';
-import 'package:cash_back_infor/ui/utils/button_primary.dart';
+import 'package:cash_back_infor/features/ui/utils/base_noti_dialog.dart';
+import 'package:cash_back_infor/features/ui/utils/button_primary.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';

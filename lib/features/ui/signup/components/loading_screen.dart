@@ -1,5 +1,5 @@
-import 'package:cash_back_infor/utils/color.dart';
-import 'package:cash_back_infor/utils/text_decoration_extension.dart';
+import 'package:cash_back_infor/features/theme/color_theme.dart';
+import 'package:cash_back_infor/features/theme/text_decoration.dart';
 import 'package:cash_back_infor/utils/text_define.dart';
 import 'package:flutter/material.dart';
 

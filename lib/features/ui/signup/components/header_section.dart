@@ -1,5 +1,5 @@
-import 'package:cash_back_infor/ui/signup/cubit/signup_state.dart';
-import 'package:cash_back_infor/utils/color.dart';
+import 'package:cash_back_infor/features/ui/signup/cubit/signup_state.dart';
+import 'package:cash_back_infor/features/theme/color_theme.dart';
 import 'package:cash_back_infor/utils/text_define.dart';
 import 'package:flutter/material.dart';
 import 'package:country_code_picker/country_code_picker.dart';
