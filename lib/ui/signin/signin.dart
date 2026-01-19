@@ -3,6 +3,9 @@ import 'package:cash_back_infor/ui/signin/cubit/signin_cubit.dart';
 import 'package:cash_back_infor/ui/signin/cubit/signin_state.dart';
 import 'package:cash_back_infor/ui/signin/form/phone_input.dart';
 import 'package:cash_back_infor/ui/utils/button_primary.dart';
+import 'package:cash_back_infor/utils/color.dart';
+import 'package:cash_back_infor/utils/text_decoration_extension.dart';
+import 'package:cash_back_infor/utils/text_define.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -55,13 +58,15 @@ class _SigninWidgetState extends State<SigninWidget> {
                         }
                         if (state.status == FormzSubmissionStatus.failure) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Đăng nhập thất bại')),
+                            const SnackBar(
+                              content: Text(AppString.signinFailure),
+                            ),
                           );
                           context.go('/cash-back');
                         }
                       },
                       child: PrimaryButton(
-                        text: 'Đăng nhập',
+                        text: AppString.signinPrimaryButton,
                         onPressed: () {
                           context.read<SigninCubit>().submit();
                         },
@@ -74,29 +79,27 @@ class _SigninWidgetState extends State<SigninWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Nếu bạn có mã kích hoạt,',
-                          style: Theme.of(context).textTheme.labelMedium
-                              ?.copyWith(color: Color(0xFF777777)),
+                          AppString.signinActiveCodeText,
+                          style: Theme.of(
+                            context,
+                          ).textTheme.labelMedium?.signinActiveCodeText,
                         ),
                         TextButton(
                           style: TextButton.styleFrom(padding: EdgeInsets.zero),
                           onPressed: () {},
                           child: Text(
-                            'Nhập tại đây',
-                            style: Theme.of(context).textTheme.labelMedium
-                                ?.copyWith(
-                                  color: Color(0xFF3393FF),
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: Color(0xFF3393FF),
-                                ),
+                            AppString.signinActiveCodeTextButton,
+                            style: Theme.of(
+                              context,
+                            ).textTheme.labelMedium?.signinActiveCodeTextButton,
                           ),
                         ),
                       ],
                     ),
                     Expanded(child: Container()),
                     BottomActionSection(
-                      textButton: 'Đăng ký',
-                      text: 'đăng nhập',
+                      textButton: AppString.signinBottomTextButton,
+                      text: AppString.signinBottomText,
                       onChangedSign: () {
                         context.push('/sign-up');
                       },
@@ -161,7 +164,7 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
       children: [
         Align(
           alignment: Alignment.center,
-          child: Image.asset('assets/image/monkey.png', width: 151),
+          child: Image.asset(AssetString.signinHeaderAsset, width: 151),
         ),
         const SizedBox(height: 11),
         Container(
@@ -173,8 +176,8 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
                           PhoneValidationError.short ||
                       widget.state.phone.displayError ==
                           PhoneValidationError.invalid)
-                  ? Color(0xFFFF4B4B)
-                  : Color(0xFFAFAFAF),
+                  ? AppColor.signinDisplayError
+                  : AppColor.signinDisplayDefault,
             ),
 
             borderRadius: BorderRadius.circular(12),
@@ -187,11 +190,11 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
             textAlign: TextAlign.start,
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: 'Số điện thoại/Tên đăng nhập',
+              hintText: AppString.signinPhoneHintText,
               errorStyle: TextStyle(height: 0),
               hintStyle: Theme.of(
                 context,
-              ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
+              ).textTheme.bodyMedium?.signinHintText,
               suffixIcon: IconButton(
                 constraints: const BoxConstraints(minHeight: 24, minWidth: 24),
                 padding: EdgeInsets.zero,
@@ -208,27 +211,27 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Số điện thoại cần nhập 6 - 15 chữ số',
+              AppString.signinPhoneErrorShortText,
               style: Theme.of(
                 context,
-              ).textTheme.labelSmall?.copyWith(color: Color(0xFFFF4B4B)),
+              ).textTheme.labelSmall?.signinErrorText,
             ),
           ),
         if (widget.state.phone.displayError == PhoneValidationError.invalid)
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Số điện thoại không đúng',
+              AppString.signinPhoneErrorInvalidText,
               style: Theme.of(
                 context,
-              ).textTheme.labelSmall?.copyWith(color: Color(0xFFFF4B4B)),
+              ).textTheme.labelSmall?.signinErrorText,
             ),
           ),
         SizedBox(height: 12),
         Container(
           height: 62,
           decoration: BoxDecoration(
-            border: Border.all(color: Color(0xFFAFAFAF)),
+            border: Border.all(color: AppColor.signinDisplayDefault),
             borderRadius: BorderRadius.circular(12),
           ),
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -239,11 +242,11 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
             textAlign: TextAlign.start,
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: 'Mật khẩu',
+              hintText: AppString.signinPasswordHintText,
               errorStyle: TextStyle(height: 0),
               hintStyle: Theme.of(
                 context,
-              ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
+              ).textTheme.bodyMedium?.signinHintText,
               suffixIconConstraints: const BoxConstraints(
                 minHeight: 24,
                 minWidth: 24,
@@ -269,18 +272,18 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "ID thiết bị: $deviceId",
+              '${AppString.signinIdHintText}$deviceId',
               style: Theme.of(
                 context,
-              ).textTheme.bodySmall?.copyWith(color: Color(0xFFAFAFAF)),
+              ).textTheme.bodySmall?.signinIdText,
             ),
             Expanded(child: Container()),
             TextButton(
               child: Text(
-                'Quên mật khẩu?',
+                AppString.signinForgotPasswordText,
                 style: Theme.of(
                   context,
-                ).textTheme.bodySmall?.copyWith(color: Color(0xFF777777)),
+                ).textTheme.bodySmall?.signinForgotPasswordText,
               ),
               onPressed: () {},
             ),

@@ -1,4 +1,7 @@
 import 'package:cash_back_infor/ui/utils/button_primary.dart';
+import 'package:cash_back_infor/utils/color.dart';
+import 'package:cash_back_infor/utils/text_decoration_extension.dart';
+import 'package:cash_back_infor/utils/text_define.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,25 +11,28 @@ class WelcomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white
-      ),
+      decoration: BoxDecoration(color: AppColor.signupWelcomeBg),
       padding: EdgeInsets.symmetric(horizontal: 24),
       child: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 45,),
+            SizedBox(height: 45),
             Text(
-              'Chào mừng bạn đến\nMonkey Stories',
+              AppString.signupWelcome,
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium?.copyWith(color: Color(0xFF36BFFA)),
+              ).textTheme.titleMedium?.signupWelcomeText,
               textAlign: TextAlign.center,
             ),
-            Image.asset('assets/image/welcome.png'),
-            SizedBox(height: 60,),
-            PrimaryButton(text: 'Tiếp tục', onPressed: (){context.push('/name-input');})
+            Image.asset(AssetString.signupWelcomeAsset),
+            SizedBox(height: 60),
+            PrimaryButton(
+              text: AppString.signupWelcomePrimary,
+              onPressed: () {
+                context.push('/name-input');
+              },
+            ),
           ],
         ),
       ),

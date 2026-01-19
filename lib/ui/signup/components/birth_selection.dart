@@ -1,6 +1,9 @@
 import 'package:cash_back_infor/ui/signup/cubit/signup_cubit.dart';
 import 'package:cash_back_infor/ui/signup/cubit/signup_state.dart';
 import 'package:cash_back_infor/ui/utils/button_primary.dart';
+import 'package:cash_back_infor/utils/color.dart';
+import 'package:cash_back_infor/utils/text_decoration_extension.dart';
+import 'package:cash_back_infor/utils/text_define.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -39,14 +42,15 @@ class _BirthSelectionWidgetState extends State<BirthSelectionWidget> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset('assets/image/name_input.png'),
+                        Image.asset(AssetString.signupBirthAsset),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            '${state.name.value} sinh vào năm nào?',
+                            '${state.name.value}${AppString.signupBirthText}',
                             maxLines: null,
-                            style: Theme.of(context).textTheme.titleSmall
-                                ?.copyWith(color: Color(0xFF4B4B4B)),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleSmall?.signupBirthText,
                           ),
                         ),
                       ],
@@ -86,14 +90,14 @@ class _BirthSelectionWidgetState extends State<BirthSelectionWidget> {
                         });
                       },
                       child: _buildYearButton(
-                        'Sinh trước năm 2010',
+                        AppString.signupBuildYearButton,
                         selectedIndex == 2009,
                         isFullWidth: true,
                       ),
                     ),
                     Expanded(child: Container()),
                     PrimaryButton(
-                      text: 'Tiếp tục',
+                      text: AppString.signupBirthPrimary,
                       onPressed: () {
                         context.push('/english-level');
                       },
@@ -121,16 +125,16 @@ Widget _buildYearButton(
     height: isFullWidth ? 60 : null,
     alignment: Alignment.center,
     decoration: BoxDecoration(
-      color: isSelected ? Color(0xFFEDF9FF) : Colors.white,
+      color: isSelected ? AppColor.signupBuildYearButtonSelecBg: AppColor.signupBuildYearButtonUnselecBg,
       border: Border.all(
-        color: isSelected ? Color(0xFF60A5FA) : Color(0xFFE5E5E5),
+        color: isSelected ? AppColor.signupBuildYearButtonSelecBorder : AppColor.signupBuildYearButtonUnselecBorder,
       ),
       borderRadius: BorderRadius.circular(12),
     ),
     child: Text(
       text,
       style: TextStyle(
-        color: isSelected ? Color(0xFF36BFFA) : Color(0xFF777777),
+        color: isSelected ? AppColor.signupBuildYearButtonSelecText : AppColor.signupBuildYearButtonUnselecText,
         fontWeight: FontWeight.w700,
       ),
     ),

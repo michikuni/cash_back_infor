@@ -1,6 +1,8 @@
 import 'package:cash_back_infor/ui/signup/cubit/signup_cubit.dart';
 import 'package:cash_back_infor/ui/signup/cubit/signup_state.dart';
 import 'package:cash_back_infor/ui/utils/button_primary.dart';
+import 'package:cash_back_infor/utils/color.dart';
+import 'package:cash_back_infor/utils/text_define.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -25,21 +27,21 @@ class NameInputWidget extends StatelessWidget {
           builder: (context, state) {
             return SafeArea(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 23),
+                padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset('assets/image/name_input.png'),
+                        Image.asset(AssetString.signupNameInputAsset),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             maxLines: null,
-                            'Tên của bé là?',
+                            AppString.signupNameInputText,
                             style: Theme.of(context).textTheme.titleSmall
-                                ?.copyWith(color: Color(0xFF4B4B4B)),
+                                ?.copyWith(color: AppColor.ebonyGrey),
                           ),
                         ),
                       ],
@@ -50,8 +52,8 @@ class NameInputWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         border: BoxBorder.all(
                           color: state.name.isValid
-                              ? Color(0xFF92C73D)
-                              : Color(0xFFE5E5E5),
+                              ? AppColor.appleGreen
+                              : AppColor.platinum,
                           width: 2,
                         ),
                         borderRadius: BorderRadius.circular(12),
@@ -61,9 +63,9 @@ class NameInputWidget extends StatelessWidget {
                           border: InputBorder.none,
                           hintText: 'Tên',
                           hintStyle: Theme.of(context).textTheme.bodyMedium
-                              ?.copyWith(color: Color(0xFFAFAFAF)),
+                              ?.copyWith(color: AppColor.mediumGrey),
                           suffixIcon: Icon(
-                            color: Color(0xFF92C73D),
+                            color: AppColor.appleGreen,
                             state.name.isValid
                                 ? Icons.check_circle_rounded
                                 : null,
@@ -71,8 +73,8 @@ class NameInputWidget extends StatelessWidget {
                         ),
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: state.name.isValid
-                              ? Color(0xFF92C73D)
-                              : Color(0xFF4B4B4B),
+                              ? AppColor.appleGreen
+                              : AppColor.ebonyGrey,
                         ),
                         onChanged: (value) {
                           context.read<SignupCubit>().nameChanged(value);
@@ -81,13 +83,13 @@ class NameInputWidget extends StatelessWidget {
                     ),
                     Expanded(child: Container()),
                     PrimaryButton(
-                      text: 'Tiếp tục',
+                      text: AppString.signupNameInputPrimary,
                       onPressed: () {
                         context.push('/birth-selection');
                       },
                       enabled: state.name.isValid ? true : false,
                     ),
-                    SizedBox(height: 34),
+                    SizedBox(height: 32),
                   ],
                 ),
               ),

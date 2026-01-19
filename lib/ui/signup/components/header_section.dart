@@ -1,4 +1,6 @@
 import 'package:cash_back_infor/ui/signup/cubit/signup_state.dart';
+import 'package:cash_back_infor/utils/color.dart';
+import 'package:cash_back_infor/utils/text_define.dart';
 import 'package:flutter/material.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
@@ -17,7 +19,7 @@ class PhoneInputSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Nhập số điện thoại',
+          AppString.signupPhoneText,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         const SizedBox(height: 21),
@@ -25,7 +27,7 @@ class PhoneInputSection extends StatelessWidget {
           height: 62,
           decoration: BoxDecoration(
             border: Border.all(
-              color: isValid ? Color(0xFF92C73D) : Colors.grey,
+              color: isValid ? AppColor.signupHeaderValid : AppColor.signupHeaderInvalid,
             ),
             borderRadius: BorderRadius.circular(12),
           ),
@@ -52,13 +54,13 @@ class PhoneInputSection extends StatelessWidget {
                   textAlign: TextAlign.start,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Số điện thoại',
+                    hintText: AppString.signupPhoneHint,
                     errorStyle: TextStyle(height: 0),
                     hintStyle: Theme.of(
                       context,
-                    ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
+                    ).textTheme.bodyMedium?.copyWith(color: AppColor.signupHeaderInvalid),
                     suffixIcon: isValid
-                        ? const Icon(Icons.check_circle, color: Colors.green)
+                        ? const Icon(Icons.check_circle, color: AppColor.signupHeaderValid)
                         : null,
                   ),
                   onChanged: onChanged,
@@ -73,10 +75,10 @@ class PhoneInputSection extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(
-                'Số điện thoại khả dụng',
+                AppString.signupPhoneValid,
                 style: Theme.of(
                   context,
-                ).textTheme.bodySmall?.copyWith(color: Color(0xFF92C73D)),
+                ).textTheme.bodySmall?.copyWith(color: AppColor.signupHeaderValid),
               ),
             ),
           ),
@@ -106,13 +108,13 @@ class _PasswordInputSectionState extends State<PasswordInputSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Tạo mật khẩu', style: Theme.of(context).textTheme.bodyLarge),
+        Text(AppString.signupPasswordText, style: Theme.of(context).textTheme.bodyLarge),
         const SizedBox(height: 21),
         Container(
           height: 56,
           decoration: BoxDecoration(
             border: Border.all(
-              color: widget.isValid ? Color(0xFF92C73D) : Colors.grey,
+              color: widget.isValid ? AppColor.signupHeaderValid : AppColor.signupHeaderInvalid,
             ),
             borderRadius: BorderRadius.circular(12),
           ),
@@ -122,11 +124,11 @@ class _PasswordInputSectionState extends State<PasswordInputSection> {
             textAlign: TextAlign.start,
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: 'Mật khẩu',
+              hintText: AppString.signupPasswordHint,
               errorStyle: TextStyle(height: 0),
               hintStyle: Theme.of(
                 context,
-              ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
+              ).textTheme.bodyMedium?.copyWith(color: AppColor.signupHeaderInvalid),
               suffixIcon: IconButton(
                 onPressed: () {
                   setState(() {
@@ -145,10 +147,10 @@ class _PasswordInputSectionState extends State<PasswordInputSection> {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Mật khẩu khả dụng',
+              AppString.signupPasswordValid,
               style: Theme.of(
                 context,
-              ).textTheme.bodySmall?.copyWith(color: Color(0xFF92C73D)),
+              ).textTheme.bodySmall?.copyWith(color: AppColor.signupHeaderValid),
             ),
           ),
         if (!widget.isValid) SizedBox(height: 14),
@@ -192,11 +194,11 @@ class _ConfirmPasswordInputSectionState
             textAlign: TextAlign.start,
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: 'Nhập lại mật khẩu',
+              hintText: AppString.signupConfirmPasswordHint,
               errorStyle: TextStyle(height: 0),
               hintStyle: Theme.of(
                 context,
-              ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
+              ).textTheme.bodyMedium?.copyWith(color: AppColor.signupHeaderInvalid),
               suffixIcon: IconButton(
                 onPressed: () {
                   setState(() {
@@ -216,12 +218,12 @@ class _ConfirmPasswordInputSectionState
             alignment: Alignment.centerLeft,
             child: Text(
               widget.state.confirmPassword.isValid
-                  ? 'Mật khẩu trùng khớp'
-                  : 'Mật khẩu không trùng khớp',
+                  ? AppString.signupConfirmPasswordValid
+                  : AppString.signupConfirmPasswordInvalid,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: widget.state.confirmPassword.isValid
-                    ? const Color(0xFF92C73D)
-                    : const Color(0xFFFF4B4B),
+                    ? AppColor.signupHeaderValid
+                    : AppColor.signupHeaderError,
               ),
             ),
           ),
@@ -233,12 +235,12 @@ class _ConfirmPasswordInputSectionState
   Color get borderColor {
     if (widget.state.confirmPassword.isValid &&
         !widget.state.confirmPassword.isPure) {
-      return const Color(0xFF92C73D);
+      return AppColor.signupHeaderValid;
     } else if (widget.state.confirmPassword.isNotValid &&
         !widget.state.confirmPassword.isPure) {
-      return const Color(0xFFFF4B4B);
+      return AppColor.signupHeaderError;
     } else {
-      return Colors.grey;
+      return AppColor.signupHeaderInvalid;
     }
   }
 }

@@ -1,3 +1,6 @@
+import 'package:cash_back_infor/utils/color.dart';
+import 'package:cash_back_infor/utils/text_decoration_extension.dart';
+import 'package:cash_back_infor/utils/text_define.dart';
 import 'package:flutter/material.dart';
 
 class FakeLoadingWidget extends StatelessWidget {
@@ -6,7 +9,7 @@ class FakeLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.white),
+      decoration: BoxDecoration(color: AppColor.signupLoadBg),
       padding: EdgeInsets.all(44),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -14,13 +17,13 @@ class FakeLoadingWidget extends StatelessWidget {
           Text(
             textAlign: TextAlign.center,
             maxLines: null,
-            "Monkey đang cập nhật dữ liệu học tập của bé",
+            AppString.signupLoadText,
             style: Theme.of(
               context,
-            ).textTheme.titleMedium?.copyWith(color: Color(0xFF4B4B4B)),
+            ).textTheme.titleMedium?.signupLoadTitleText,
           ),
           SizedBox(height: 56),
-          Image.asset('assets/image/fake_loading.png'),
+          Image.asset(AssetString.signupLoadAsset),
           SizedBox(height: 66),
           Expanded(
             child: Column(
@@ -29,14 +32,12 @@ class FakeLoadingWidget extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(Icons.check_circle, color: Color(0xFF36BFFA)),
+                    Icon(Icons.check_circle, color: AppColor.signupLoadCheckIc),
                     Expanded(
                       child: Text(
                         maxLines: null,
-                        'Cập nhật thông tin tài khoản sử dụng',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Color(0xFF36BFFA),
-                        ),
+                        AppString.signupLoad1Text,
+                        style: Theme.of(context).textTheme.bodySmall?.signupLoadText,
                       ),
                     ),
                   ],
@@ -45,14 +46,12 @@ class FakeLoadingWidget extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(Icons.check_circle, color: Color(0xFF36BFFA)),
+                    Icon(Icons.check_circle, color: AppColor.signupLoadCheckIc),
                     Text(
                       textAlign: TextAlign.center,
                       maxLines: null,
-                      'Cập nhật hồ sơ học tập',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Color(0xFF36BFFA),
-                      ),
+                      AppString.signupLoad2Text,
+                      style: Theme.of(context).textTheme.bodySmall?.signupLoadText,
                     ),
                   ],
                 ),
@@ -60,14 +59,12 @@ class FakeLoadingWidget extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(Icons.check_circle, color: Color(0xFF36BFFA)),
+                    Icon(Icons.check_circle, color: AppColor.signupLoadCheckIc),
                     Text(
                       textAlign: TextAlign.center,
                       maxLines: null,
-                      'Cập nhật thông tin gói học',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Color(0xFF36BFFA),
-                      ),
+                      AppString.signupLoad3Text,
+                      style: Theme.of(context).textTheme.bodySmall?.signupLoadText,
                     ),
                   ],
                 ),

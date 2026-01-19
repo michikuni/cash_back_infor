@@ -1,5 +1,9 @@
 import 'package:cash_back_infor/domain/entity/user.dart';
+import 'package:cash_back_infor/utils/color.dart';
+import 'package:cash_back_infor/utils/text_define.dart';
+import 'package:cash_back_infor/utils/text_decoration_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({super.key, required this.userData});
@@ -12,15 +16,14 @@ class HomeWidget extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            context.go('/');
+          },
           icon: Icon(Icons.arrow_back_ios_new_rounded),
         ),
         title: Text(
-          'Hồ sơ học tập',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Color(0xFF333741),
-            fontWeight: FontWeight.w900,
-          ),
+          AppString.homeAppBarTitle,
+          style: Theme.of(context).textTheme.bodyMedium?.homeAppBarTitle,
         ),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.settings_rounded)),
@@ -38,19 +41,17 @@ class HomeWidget extends StatelessWidget {
               children: [
                 ...List.generate(
                   userData.length,
-                  (i) => _buildUserCard(userData[i], 180),
+                  (i) => _buildUserCard(userData[i], 180, context),
                 ),
-                _addUserCard(180),
+                _addUserCard(180, context),
                 Center(
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
-                      'Nhập mã kích hoạt',
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        decoration: TextDecoration.underline,
-                        decorationColor: Color(0xFF3393FF),
-                        color: Color(0xFF3393FF)
-                      ),
+                      AppString.homeActiveCodeTextButton,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.labelMedium?.homeActiveCodeTextButton,
                     ),
                   ),
                 ),
@@ -63,7 +64,7 @@ class HomeWidget extends StatelessWidget {
   }
 }
 
-Widget _buildUserCard(UserEntity user, double width) {
+Widget _buildUserCard(UserEntity user, double width, BuildContext context) {
   return Column(
     mainAxisSize: MainAxisSize.min,
     mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +74,7 @@ Widget _buildUserCard(UserEntity user, double width) {
         width: width,
         height: width,
         decoration: BoxDecoration(
-          color: const Color(0xFFE3F2FD),
+          color: AppColor.homeUserCardBg,
           borderRadius: BorderRadius.circular(32),
         ),
         child: Center(
@@ -81,13 +82,13 @@ Widget _buildUserCard(UserEntity user, double width) {
             width: 120,
             height: 120,
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 196, 196, 196),
+              color: AppColor.homeUserCardAvtBg,
               shape: BoxShape.circle,
             ),
             padding: EdgeInsets.all(5),
             child: CircleAvatar(
               radius: 55,
-              backgroundImage: AssetImage('assets/image/ok.png'),
+              backgroundImage: AssetImage(AssetString.homeAssetAvt),
             ),
           ),
         ),
@@ -95,17 +96,13 @@ Widget _buildUserCard(UserEntity user, double width) {
       const SizedBox(height: 12),
       Text(
         user.name,
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Color(0xFF333741),
-        ),
+        style: Theme.of(context).textTheme.labelMedium?.homeUserCardText
       ),
     ],
   );
 }
 
-Widget _addUserCard(double width) {
+Widget _addUserCard(double width, BuildContext context) {
   return Column(
     mainAxisSize: MainAxisSize.min,
     mainAxisAlignment: MainAxisAlignment.center,
@@ -115,19 +112,15 @@ Widget _addUserCard(double width) {
         width: width,
         height: width,
         decoration: BoxDecoration(
-          color: const Color(0xFFF2F4F7),
+          color: AppColor.homeAddCardBg,
           borderRadius: BorderRadius.circular(32),
         ),
-        child: Center(child: Image.asset('assets/image/plus_icon.png')),
+        child: Center(child: Image.asset(AssetString.homeAssetAdd)),
       ),
       const SizedBox(height: 12),
       Text(
         'Thêm',
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Color(0xFFD0D5DD),
-        ),
+        style: Theme.of(context).textTheme.labelMedium?.homeAddTextButton
       ),
     ],
   );

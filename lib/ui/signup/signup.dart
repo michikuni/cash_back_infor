@@ -1,4 +1,5 @@
 import 'package:cash_back_infor/ui/utils/button_primary.dart';
+import 'package:cash_back_infor/utils/text_define.dart';
 
 import 'cubit/signup_state.dart';
 import 'cubit/signup_cubit.dart';
@@ -51,7 +52,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                     ),
                     Expanded(child: Container()),
                     PrimaryButton(
-                      text: 'Tiếp tục',
+                      text: AppString.signupPrimaryButton,
                       onPressed: () {
                         if (state.step == SignupStep.password) {
                           context.push('/welcome');
@@ -63,10 +64,30 @@ class _SignupWidgetState extends State<SignupWidget> {
                     ),
                     const SizedBox(height: 27),
                     BottomActionSection(
-                      text: 'đăng ký',
-                      textButton: 'Đăng nhập',
+                      text: AppString.signupBottomText,
+                      textButton: AppString.signupBottomTextButton,
                       onChangedSign: () {
-                        context.go('/');
+                        // if (state.name.isNotValid) {
+                          context.go('/');
+                        // } else {
+                        //   showDialog(
+                        //     context: context,
+                        //     builder: (context) => BaseNotiDiaLogWidget(
+                        //       imageUrl: 'assets/image/signup_noti.png',
+                        //       title:
+                        //           'Ba mẹ sẽ mất đi hồ sơ học ${state.name}, ba mẹ có muốn đăng nhập không?',
+                        //       height: 384,
+                        //       child: Row(
+                        //         children: [
+                        //           PrimaryButton(
+                        //             text: 'Đăng nhập',
+                        //             onPressed: () => context.go('/'),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   );
+                        // }
                       },
                     ),
                   ],
@@ -99,7 +120,7 @@ class _HeaderSection extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.center,
-          child: Image.asset('assets/image/monkey.png', width: 151),
+          child: Image.asset(AssetString.signupHeaderAsset, width: 151),
         ),
         const SizedBox(height: 11),
         _buildInput(

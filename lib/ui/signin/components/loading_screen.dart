@@ -1,3 +1,5 @@
+import 'package:cash_back_infor/utils/color.dart';
+import 'package:cash_back_infor/utils/text_define.dart';
 import 'package:flutter/material.dart';
 
 class LoadingWidget extends StatelessWidget {
@@ -8,9 +10,9 @@ class LoadingWidget extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Color(0xFF000000).withValues(alpha: 0.5),
+        color: AppColor.signinLoadBg,
       ),
-      child: Image.asset('assets/image/loading_signin.png'),
+      child: Image.asset(AssetString.loadAssset),
     );
   }
 }

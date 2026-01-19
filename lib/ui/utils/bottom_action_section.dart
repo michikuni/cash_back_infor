@@ -49,7 +49,7 @@ class BottomActionSection extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) =>
                         BaseNotiDiaLogWidget(
-                          imageUrl: 'assets/image/login_noti.png',
+                          imageUrl: 'assets/image/signin_noti.png',
                           title: 'Đăng nhập bằng Facebook thất bại',
                           height: 360,
                           child: PrimaryButton(
