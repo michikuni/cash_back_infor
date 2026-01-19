@@ -1,7 +1,7 @@
 import 'package:cash_back_infor/domain/entity/user.dart';
+import 'package:cash_back_infor/features/ui/signin/form/phone_input.dart';
 import 'package:formz/formz.dart';
 
-import '../form/phone_input.dart';
 
 class SigninState {
   final PhoneInput phone;

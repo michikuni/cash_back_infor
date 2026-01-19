@@ -1,6 +1,6 @@
-import '../../../../domain/usecase/get_user_use_case.dart';
-import 'signin_state.dart';
-import '../form/phone_input.dart';
+import 'package:cash_back_infor/domain/usecase/get_user_use_case.dart';
+import 'package:cash_back_infor/features/ui/signin/cubit/signin_state.dart';
+import 'package:cash_back_infor/features/ui/signin/form/phone_input.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 

@@ -1,13 +1,13 @@
-import '../../../../data/models/user.dart';
-import '../../../../domain/usecase/create_user_use_case.dart';
-import '../../../../domain/usecase/get_user_use_case.dart';
-import '../form/confirm_password_input.dart';
-import '../form/name_input.dart';
+import 'package:cash_back_infor/data/models/user.dart';
+import 'package:cash_back_infor/domain/usecase/create_user_use_case.dart';
+import 'package:cash_back_infor/domain/usecase/get_user_use_case.dart';
+import 'package:cash_back_infor/features/ui/signup/form/confirm_password_input.dart';
+import 'package:cash_back_infor/features/ui/signup/form/name_input.dart';
+import 'package:cash_back_infor/features/ui/signup/form/password_input.dart';
+import 'package:cash_back_infor/features/ui/signup/form/phone_input.dart';
+import 'package:cash_back_infor/features/ui/signup/cubit/signup_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'signup_state.dart';
-import '../form/phone_input.dart';
-import '../form/password_input.dart';
 
 class SignupCubit extends Cubit<SignupState> {
   SignupCubit({required this.createUserUseCase, required this.getUserUseCase})

@@ -2,6 +2,7 @@ import 'package:cash_back_infor/features/ui/signin/components/loading_screen.dar
 import 'package:cash_back_infor/features/ui/signin/cubit/signin_cubit.dart';
 import 'package:cash_back_infor/features/ui/signin/cubit/signin_state.dart';
 import 'package:cash_back_infor/features/ui/signin/form/phone_input.dart';
+import 'package:cash_back_infor/features/ui/utils/bottom_action_section.dart';
 import 'package:cash_back_infor/features/ui/utils/button_primary.dart';
 import 'package:cash_back_infor/features/theme/color_theme.dart';
 import 'package:cash_back_infor/features/theme/text_decoration.dart';
@@ -10,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import '../utils/bottom_action_section.dart';
 
 class SigninWidget extends StatefulWidget {
   const SigninWidget({super.key});

@@ -1,8 +1,8 @@
-import '../form/name_input.dart';
+import 'package:cash_back_infor/features/ui/signup/form/confirm_password_input.dart';
+import 'package:cash_back_infor/features/ui/signup/form/name_input.dart';
+import 'package:cash_back_infor/features/ui/signup/form/password_input.dart';
+import 'package:cash_back_infor/features/ui/signup/form/phone_input.dart';
 import 'package:formz/formz.dart';
-import '../form/phone_input.dart';
-import '../form/password_input.dart';
-import '../form/confirm_password_input.dart';
 
 abstract class SignupFormValidationState {
   const SignupFormValidationState();

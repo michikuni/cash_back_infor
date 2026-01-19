@@ -1,3 +1,4 @@
+import 'package:cash_back_infor/features/ui/utils/bottom_action_section.dart';
 import 'package:cash_back_infor/features/ui/utils/button_primary.dart';
 import 'package:cash_back_infor/utils/text_define.dart';
 
@@ -7,7 +8,6 @@ import 'components/header_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../utils/bottom_action_section.dart';
 
 class SignupWidget extends StatefulWidget {
   const SignupWidget({super.key});
