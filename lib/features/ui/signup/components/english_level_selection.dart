@@ -58,7 +58,7 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                       ],
                     ),
                     SizedBox(height: 24),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         setState(() {
                           context.read<SignupCubit>().englishLevel(
@@ -109,7 +109,7 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                       ),
                     ),
                     SizedBox(height: 12),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         setState(() {
                           context.read<SignupCubit>().englishLevel(
@@ -160,7 +160,7 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                       ),
                     ),
                     SizedBox(height: 12),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         setState(() {
                           context.read<SignupCubit>().englishLevel(
@@ -211,7 +211,7 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                       ),
                     ),
                     SizedBox(height: 12),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         setState(() {
                           context.read<SignupCubit>().englishLevel(
@@ -271,7 +271,7 @@ class _EnglishLevelSelectionWidget extends State<EnglishLevelSelectionWidget> {
                           showDialog(
                             context: context,
                             barrierDismissible: false,
-                            builder: (context) => const FakeLoadingWidget(),
+                            builder: (context) => const SignupLoadingWidget(),
                           );
                         }
 

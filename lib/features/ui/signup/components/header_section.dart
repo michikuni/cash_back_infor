@@ -7,11 +7,13 @@ import 'package:country_code_picker/country_code_picker.dart';
 class PhoneInputSection extends StatelessWidget {
   final bool isValid;
   final ValueChanged<String> onChanged;
+  final SignupState state;
 
   const PhoneInputSection({
     super.key,
     required this.isValid,
     required this.onChanged,
+    required this.state,
   });
   @override
   Widget build(BuildContext context) {
@@ -22,51 +24,62 @@ class PhoneInputSection extends StatelessWidget {
           AppString.signupPhoneText,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
-        const SizedBox(height: 21),
+        const SizedBox(height: 20),
         Container(
           height: 62,
           decoration: BoxDecoration(
             border: Border.all(
-              color: isValid ? AppColor.signupHeaderValid : AppColor.signupHeaderInvalid,
+              color: isValid
+                  ? AppColor.signupHeaderValid
+                  : AppColor.signupHeaderInvalid,
             ),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Row(
-            children: [
-              SizedBox(
-                width: 80,
-                child: CountryCodePicker(
-                  initialSelection: 'VN',
-                  showFlag: true,
-                  flagWidth: 28,
-                  hideMainText: true,
-                  showDropDownButton: true,
-                  padding: EdgeInsets.zero,
-                  margin: EdgeInsets.zero,
-                ),
-              ),
-              const VerticalDivider(width: 1, indent: 16, endIndent: 16),
-              const SizedBox(width: 6),
-
-              Expanded(
-                child: TextFormField(
-                  keyboardType: TextInputType.phone,
-                  textAlign: TextAlign.start,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: AppString.signupPhoneHint,
-                    errorStyle: TextStyle(height: 0),
-                    hintStyle: Theme.of(
-                      context,
-                    ).textTheme.bodyMedium?.copyWith(color: AppColor.signupHeaderInvalid),
-                    suffixIcon: isValid
-                        ? const Icon(Icons.check_circle, color: AppColor.signupHeaderValid)
-                        : null,
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: Center(
+            child: Row(
+              children: [
+                if (state.phone.value.isEmpty)
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 80,
+                        child: CountryCodePicker(
+                          initialSelection: 'VN',
+                          showFlag: true,
+                          flagWidth: 28,
+                          hideMainText: true,
+                          showDropDownButton: true,
+                          padding: EdgeInsets.zero,
+                          margin: EdgeInsets.zero,
+                        ),
+                      ),
+                      VerticalDivider(width: 1, indent: 16, endIndent: 16),
+                      SizedBox(width: 8),
+                    ],
                   ),
-                  onChanged: onChanged,
+                Expanded(
+                  child: TextFormField(
+                    keyboardType: TextInputType.phone,
+                    textAlign: TextAlign.start,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: AppString.signupPhoneHint,
+                      errorStyle: TextStyle(height: 0),
+                      hintStyle: Theme.of(context).textTheme.bodyMedium
+                          ?.copyWith(color: AppColor.signupHeaderInvalid),
+                      suffixIcon: isValid
+                          ? const Icon(
+                              Icons.check_circle,
+                              color: AppColor.signupHeaderValid,
+                            )
+                          : null,
+                    ),
+                    onChanged: onChanged,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         if (isValid)
@@ -76,9 +89,9 @@ class PhoneInputSection extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8),
               child: Text(
                 AppString.signupPhoneValid,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodySmall?.copyWith(color: AppColor.signupHeaderValid),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: AppColor.signupHeaderValid,
+                ),
               ),
             ),
           ),
@@ -108,39 +121,46 @@ class _PasswordInputSectionState extends State<PasswordInputSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppString.signupPasswordText, style: Theme.of(context).textTheme.bodyLarge),
+        Text(
+          AppString.signupPasswordText,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
         const SizedBox(height: 21),
         Container(
           height: 56,
           decoration: BoxDecoration(
             border: Border.all(
-              color: widget.isValid ? AppColor.signupHeaderValid : AppColor.signupHeaderInvalid,
+              color: widget.isValid
+                  ? AppColor.signupHeaderValid
+                  : AppColor.signupHeaderInvalid,
             ),
             borderRadius: BorderRadius.circular(12),
           ),
-          padding: EdgeInsets.fromLTRB(8, 0, 4, 0),
-          child: TextFormField(
-            obscureText: _isObscured,
-            textAlign: TextAlign.start,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: AppString.signupPasswordHint,
-              errorStyle: TextStyle(height: 0),
-              hintStyle: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(color: AppColor.signupHeaderInvalid),
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    _isObscured = !_isObscured;
-                  });
-                },
-                icon: Icon(
-                  _isObscured ? Icons.visibility_off : Icons.visibility,
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: Center(
+            child: TextFormField(
+              obscureText: _isObscured,
+              textAlign: TextAlign.start,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: AppString.signupPasswordHint,
+                errorStyle: TextStyle(height: 0),
+                hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColor.signupHeaderInvalid,
+                ),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _isObscured = !_isObscured;
+                    });
+                  },
+                  icon: Icon(
+                    _isObscured ? Icons.visibility_off : Icons.visibility,
+                  ),
                 ),
               ),
+              onChanged: widget.onChanged,
             ),
-            onChanged: widget.onChanged,
           ),
         ),
         if (widget.isValid)
@@ -148,12 +168,12 @@ class _PasswordInputSectionState extends State<PasswordInputSection> {
             alignment: Alignment.centerLeft,
             child: Text(
               AppString.signupPasswordValid,
-              style: Theme.of(
-                context,
-              ).textTheme.bodySmall?.copyWith(color: AppColor.signupHeaderValid),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: AppColor.signupHeaderValid,
+              ),
             ),
           ),
-        if (!widget.isValid) SizedBox(height: 14),
+        if (!widget.isValid) SizedBox(height: 12),
       ],
     );
   }
@@ -188,29 +208,31 @@ class _ConfirmPasswordInputSectionState
             border: Border.all(color: borderColor),
             borderRadius: BorderRadius.circular(12),
           ),
-          padding: EdgeInsets.fromLTRB(8, 0, 4, 0),
-          child: TextFormField(
-            obscureText: _isObscured,
-            textAlign: TextAlign.start,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: AppString.signupConfirmPasswordHint,
-              errorStyle: TextStyle(height: 0),
-              hintStyle: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(color: AppColor.signupHeaderInvalid),
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    _isObscured = !_isObscured;
-                  });
-                },
-                icon: Icon(
-                  _isObscured ? Icons.visibility_off : Icons.visibility,
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: Center(
+            child: TextFormField(
+              obscureText: _isObscured,
+              textAlign: TextAlign.start,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: AppString.signupConfirmPasswordHint,
+                errorStyle: TextStyle(height: 0),
+                hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColor.signupHeaderInvalid,
+                ),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _isObscured = !_isObscured;
+                    });
+                  },
+                  icon: Icon(
+                    _isObscured ? Icons.visibility_off : Icons.visibility,
+                  ),
                 ),
               ),
+              onChanged: widget.onChanged,
             ),
-            onChanged: widget.onChanged,
           ),
         ),
         if (!widget.state.confirmPassword.isPure) ...[

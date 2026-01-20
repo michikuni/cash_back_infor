@@ -143,6 +143,7 @@ Widget _buildInput(
   switch (state.step) {
     case SignupStep.phone:
       return PhoneInputSection(
+        state: state,
         isValid: state.phone.isValid,
         onChanged: onPhoneChanged,
       );

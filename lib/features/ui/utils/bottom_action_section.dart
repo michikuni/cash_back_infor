@@ -138,9 +138,8 @@ class _SocialButton extends StatelessWidget {
     return Material(
       color: bgColor,
       borderRadius: BorderRadius.circular(8),
-      child: InkWell(
+      child: GestureDetector(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
         child: Container(
           height: 44,
           decoration: BoxDecoration(

@@ -44,7 +44,7 @@ class AppColor {
   static const Color signupEnglishLevelSelectBorder = skyBlue;
   static const Color signupEnglishLevelUnselectBorder = platinum;
   static const Color signupEnglishLevelSelectBg = cloudWhite;
-  static const Color signupEnglishLevelUnselectBg = cloudWhite;
+  static const Color signupEnglishLevelUnselectBg = pureWhite;
   static const Color signupEnglishLevelSelectText = skyBlue;
   static const Color signupEnglishLevelUnselectText = ebonyGrey;
 

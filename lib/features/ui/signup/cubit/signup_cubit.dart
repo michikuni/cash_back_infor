@@ -87,6 +87,7 @@ class SignupCubit extends Cubit<SignupState> {
       englishLevel: state.englishLevel.name,
       name: state.name.value,
     );
+    // print(state.englishLevel.name);
     final response = await createUserUseCase(user).run();
     response.fold(
       (errorMessage) {

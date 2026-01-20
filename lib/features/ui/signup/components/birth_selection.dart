@@ -46,7 +46,7 @@ class _BirthSelectionWidgetState extends State<BirthSelectionWidget> {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            '${state.name.value}${AppString.signupBirthText}',
+                            '${state.name.value} ${AppString.signupBirthText}',
                             maxLines: null,
                             style: Theme.of(
                               context,
@@ -69,7 +69,7 @@ class _BirthSelectionWidgetState extends State<BirthSelectionWidget> {
                       itemBuilder: (context, index) {
                         int year = 2021 - index;
                         final isSelected = selectedIndex == year;
-                        return InkWell(
+                        return GestureDetector(
                           onTap: () {
                             setState(() {
                               selectedIndex = year;
@@ -82,7 +82,7 @@ class _BirthSelectionWidgetState extends State<BirthSelectionWidget> {
                     ),
 
                     const SizedBox(height: 12),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         setState(() {
                           selectedIndex = 2009;

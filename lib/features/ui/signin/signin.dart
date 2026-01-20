@@ -107,7 +107,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                         onPressed: () {},
                                       ),
                                       SizedBox(height: 12),
-                                      InkWell(
+                                      GestureDetector(
                                         onTap: () {
                                           context.pop();
                                         },
@@ -254,14 +254,14 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
               hintText: AppString.signinPhoneHintText,
               errorStyle: TextStyle(height: 0),
               hintStyle: Theme.of(context).textTheme.bodyMedium?.signinHintText,
-              suffixIcon: IconButton(
+              suffixIcon: _hasPhoneText ? IconButton(
                 constraints: const BoxConstraints(minHeight: 24, minWidth: 24),
                 padding: EdgeInsets.zero,
                 onPressed: () {
                   _phoneTextController.text = '';
                 },
-                icon: Icon(_hasPhoneText ? Icons.cancel : null),
-              ),
+                icon: Icon(Icons.cancel),
+              ) : null,
             ),
             onChanged: widget.onPhoneChanged,
           ),
@@ -304,7 +304,7 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
                 minHeight: 24,
                 minWidth: 24,
               ),
-              suffixIcon: IconButton(
+              suffixIcon: _hasPasswordText ? IconButton(
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
                 onPressed: () {
@@ -312,12 +312,8 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
                     _isObscured = !_isObscured;
                   });
                 },
-                icon: Icon(
-                  _hasPasswordText
-                      ? (_isObscured ? Icons.visibility_off : Icons.visibility)
-                      : null,
-                ),
-              ),
+                icon: Icon(_isObscured ? Icons.visibility_off : Icons.visibility),
+              ) : null,
             ),
           ),
         ),
@@ -336,7 +332,9 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
                   context,
                 ).textTheme.bodySmall?.signinForgotPasswordText,
               ),
-              onPressed: () {},
+              onPressed: () {
+                context.push('/cash-back');
+              },
             ),
           ],
         ),

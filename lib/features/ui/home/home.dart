@@ -19,7 +19,7 @@ class HomeWidget extends StatelessWidget {
           onPressed: () {
             context.go('/');
           },
-          icon: Icon(Icons.arrow_back_ios_new_rounded),
+          icon: Icon(Icons.arrow_back_ios_new_rounded,),
         ),
         title: Text(
           AppString.homeAppBarTitle,

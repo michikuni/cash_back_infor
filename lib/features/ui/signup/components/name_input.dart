@@ -58,27 +58,29 @@ class NameInputWidget extends StatelessWidget {
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Tên',
-                          hintStyle: Theme.of(context).textTheme.bodyMedium
-                              ?.copyWith(color: AppColor.mediumGrey),
-                          suffixIcon: Icon(
-                            color: AppColor.appleGreen,
-                            state.name.isValid
-                                ? Icons.check_circle_rounded
-                                : null,
+                      child: Center(
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Tên',
+                            hintStyle: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(color: AppColor.mediumGrey),
+                            suffixIcon: Icon(
+                              color: AppColor.appleGreen,
+                              state.name.isValid
+                                  ? Icons.check_circle_rounded
+                                  : null,
+                            ),
                           ),
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: state.name.isValid
+                                ? AppColor.appleGreen
+                                : AppColor.ebonyGrey,
+                          ),
+                          onChanged: (value) {
+                            context.read<SignupCubit>().nameChanged(value);
+                          },
                         ),
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: state.name.isValid
-                              ? AppColor.appleGreen
-                              : AppColor.ebonyGrey,
-                        ),
-                        onChanged: (value) {
-                          context.read<SignupCubit>().nameChanged(value);
-                        },
                       ),
                     ),
                     Expanded(child: Container()),
