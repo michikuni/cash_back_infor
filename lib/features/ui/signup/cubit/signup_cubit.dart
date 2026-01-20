@@ -80,18 +80,22 @@ class SignupCubit extends Cubit<SignupState> {
 
   void submit() async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    try {
-      final user = UserModel(
-        phone: state.phone.value,
-        password: state.password.value,
-        dob: state.birthSelection,
-        englishLevel: state.englishLevel.name,
-        name: state.name.value,
-      );
-      await createUserUseCase(user);
-      emit(state.copyWith(status: FormzSubmissionStatus.success));
-    } catch (error) {
-      emit(state.copyWith(status: FormzSubmissionStatus.failure));
-    }
+    final user = UserModel(
+      phone: state.phone.value,
+      password: state.password.value,
+      dob: state.birthSelection,
+      englishLevel: state.englishLevel.name,
+      name: state.name.value,
+    );
+    final response = await createUserUseCase(user).run();
+    response.fold(
+      (errorMessage) {
+        print(errorMessage);
+        emit(state.copyWith(status: FormzSubmissionStatus.failure));
+      },
+      (userEntity) {
+        emit(state.copyWith(status: FormzSubmissionStatus.success));
+      },
+    );
   }
 }

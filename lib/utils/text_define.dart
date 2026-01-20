@@ -19,10 +19,7 @@ class AppString{
   static const String signinPasswordDialog = 'Bạn đã nhập sai mật khẩu quá 5 lần.\nChọn "Quên mật khẩu" để khôi phục nhé.';
   static const String signinPasswordDialogPrimary = 'Quên mật khẩu';
   static const String signinPasswordDialogSecondary = 'Thử lại';
-
-
-
-    
+   
   //Signup
   static const String signupPrimaryButton = 'Tiếp tục';
   static const String signupBottomTextButton = 'Đăng nhập';
@@ -56,8 +53,8 @@ class AppString{
   //Signup/Load
   static const String signupLoadText = 'Monkey đang cập nhật dữ liệu học tập của bé';
   static const String signupLoad1Text = 'Cập nhật thông tin tài khoản sử dụng';
-  static const String signupLoad2Text = 'Monkey đang cập nhật dữ liệu học tập của bé';
-  static const String signupLoad3Text = 'Monkey đang cập nhật dữ liệu học tập của bé';
+  static const String signupLoad2Text = 'Cập nhật hồ sơ học tập';
+  static const String signupLoad3Text = 'Cập nhật thông tin gói học';
 
   //Signup/Welcome
   static const String signupWelcome = 'Chào mừng bạn đến\nMonkey Stories';

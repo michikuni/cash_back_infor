@@ -8,18 +8,23 @@ class UserRepositoryImpl extends IUserRepository {
   UserRepositoryImpl(this.dio);
   @override
   Future<UserEntity> createUser(UserEntity user) async {
-    final userModel = UserModel(
-      phone: user.phone,
-      password: user.password,
-      dob: user.dob,
-      englishLevel: user.englishLevel,
-      name: user.name,
-    );
-    final response = await dio.post(
-      '/api/users/register/create-user',
-      data: userModel.toJson(),
-    );
-    return UserModel.fromJson(response.data);
+    try {
+      final userModel = UserModel(
+        phone: user.phone,
+        password: user.password,
+        dob: user.dob,
+        englishLevel: user.englishLevel,
+        name: user.name,
+      );
+      final response = await dio.post(
+        '/api/users/register/create-user',
+        data: userModel.toJson(),
+      );
+      return UserModel.fromJson(response.data);
+    } catch (e) {
+      print('Lỗi tạo user: $e');
+      rethrow;
+    }
   }
 
   @override

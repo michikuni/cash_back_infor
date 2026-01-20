@@ -20,16 +20,12 @@ class SigninCubit extends Cubit<SigninState> {
 
   void submit() async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    try {
-      final response = await getUserUseCase();
-      emit(
-        state.copyWith(
-          status: FormzSubmissionStatus.success,
-          userData: response,
-        ),
-      );
-    } catch (e) {
-      emit(state.copyWith(status: FormzSubmissionStatus.failure));
-    }
+    final response = await getUserUseCase().run();
+    response.fold(
+      (error) => emit(state.copyWith(status: FormzSubmissionStatus.failure)),
+      (data) => emit(
+        state.copyWith(status: FormzSubmissionStatus.success, userData: data),
+      ),
+    );
   }
 }

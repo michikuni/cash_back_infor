@@ -24,7 +24,7 @@ class AppColor {
 
   //Home
   static const Color homeUserCardBg =  aliceBlue;
-  static const Color homeUserCardAvtBg = silver;
+  static const Color homeUserCardAvtBg = platinum;
   static const Color homeAddCardBg = antiFlashWhite;
   
   //Signin

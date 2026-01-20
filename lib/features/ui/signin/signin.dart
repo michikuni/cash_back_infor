@@ -90,7 +90,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                           onPressed: () {
                             context.read<SigninCubit>().countSignin();
                             print(state.signCount);
-                            if (state.signCount % 5 == 0) {
+                            if (state.signCount % 5 == 0 && state.signCount > 0) {
                               showDialog(
                                 context: context,
                                 builder: (context) => BaseNotiDiaLogWidget(
