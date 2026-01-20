@@ -9,7 +9,7 @@ class AppColor {
   static const Color cloudWhite = Color(0xFFF8FDFF);
   static const Color silver =  Color(0xFFC4C4C4);
   static const Color antiFlashWhite =  Color(0xFFF2F4F7);
-  static const Color blackBlur =  Color(0xCC000000);
+  static const Color blackBlur =  Color(0x50000000);
   static const Color mediumGrey =  Color(0xFFAFAFAF);
   static const Color platinum = Color(0xFFE5E5E5);
   static const Color slateGrey = Color(0xFF777777);

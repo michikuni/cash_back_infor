@@ -10,43 +10,32 @@ extension TextStyleDecoration on TextStyle {
     decorationColor: AppColor.vividBlue,
     color: AppColor.vividBlue,
   );
-  TextStyle get homeAddTextButton => copyWith(
-    color: AppColor.lightGrey);
-  TextStyle get homeUserCardText => copyWith(
-    color: AppColor.darkCharcoal);
+  TextStyle get homeAddTextButton => copyWith(color: AppColor.lightGrey);
+  TextStyle get homeUserCardText => copyWith(color: AppColor.darkCharcoal);
 
   //Signin
-  TextStyle get signinActiveCodeText => copyWith(
-    color: AppColor.slateGrey);
+  TextStyle get signinActiveCodeText => copyWith(color: AppColor.slateGrey);
   TextStyle get signinActiveCodeTextButton => copyWith(
     color: AppColor.vividBlue,
     decoration: TextDecoration.underline,
     decorationColor: AppColor.vividBlue,
   );
-  TextStyle get signinHintText =>
-      copyWith(color: AppColor.mediumGrey);
-  TextStyle get signinErrorText => copyWith(
-    color: AppColor.brightRed);
-  TextStyle get signinIdText => copyWith(
-    color: AppColor.mediumGrey);
-  TextStyle get signinForgotPasswordText => copyWith(
-    color: AppColor.slateGrey);
+  TextStyle get signinHintText => copyWith(color: AppColor.mediumGrey);
+  TextStyle get signinErrorText => copyWith(color: AppColor.brightRed);
+  TextStyle get signinIdText => copyWith(color: AppColor.mediumGrey);
+  TextStyle get signinForgotPasswordText => copyWith(color: AppColor.slateGrey);
+  TextStyle get signinSecondaryText => copyWith(color: AppColor.skyBlue);
 
   // Signup/BirthSelection
-  TextStyle get signupBirthText => copyWith(
-    color: AppColor.ebonyGrey);
+  TextStyle get signupBirthText => copyWith(color: AppColor.ebonyGrey);
 
   //Signup/EnglishLevel
-  TextStyle get signupEnglishLevelText => copyWith(
-    color: AppColor.ebonyGrey);
+  TextStyle get signupEnglishLevelText => copyWith(color: AppColor.ebonyGrey);
 
   //Signup/Load
-  TextStyle get signupLoadTitleText => copyWith(
-    color: AppColor.ebonyGrey);
-  TextStyle get signupLoadText => copyWith(
-    color: AppColor.skyBlue);
+  TextStyle get signupLoadTitleText => copyWith(color: AppColor.ebonyGrey);
+  TextStyle get signupLoadText => copyWith(color: AppColor.skyBlue);
 
   //Signup/Welcome
-  TextStyle get signupWelcomeText => copyWith(
-    color: AppColor.skyBlue);
+  TextStyle get signupWelcomeText => copyWith(color: AppColor.skyBlue);
 }

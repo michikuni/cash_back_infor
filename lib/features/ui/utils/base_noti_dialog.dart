@@ -47,7 +47,7 @@ class BaseNotiDiaLogWidget extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Color(0xFF4B4B4B))
                     ),
                     SizedBox(height: 12,),
-                    Text(title, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Color(0xFF777777)),),
+                    Text(title, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Color(0xFF777777)), textAlign: TextAlign.center,),
                     SizedBox(height: 24),
                     child           
                   ],

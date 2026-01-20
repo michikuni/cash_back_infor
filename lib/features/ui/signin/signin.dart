@@ -2,6 +2,7 @@ import 'package:cash_back_infor/features/ui/signin/components/loading_screen.dar
 import 'package:cash_back_infor/features/ui/signin/cubit/signin_cubit.dart';
 import 'package:cash_back_infor/features/ui/signin/cubit/signin_state.dart';
 import 'package:cash_back_infor/features/ui/signin/form/phone_input.dart';
+import 'package:cash_back_infor/features/ui/utils/base_noti_dialog.dart';
 import 'package:cash_back_infor/features/ui/utils/bottom_action_section.dart';
 import 'package:cash_back_infor/features/ui/utils/button_primary.dart';
 import 'package:cash_back_infor/features/theme/color_theme.dart';
@@ -86,7 +87,67 @@ class _SigninWidgetState extends State<SigninWidget> {
                         ),
                         TextButton(
                           style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                          onPressed: () {},
+                          onPressed: () {
+                            context.read<SigninCubit>().countSignin();
+                            print(state.signCount);
+                            if (state.signCount % 5 == 0) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => BaseNotiDiaLogWidget(
+                                  imageUrl: AssetString.signupDialogAsset,
+                                  title: AppString.signinPasswordDialog,
+                                  height: 516,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      PrimaryButton(
+                                        text: AppString
+                                            .signinPasswordDialogPrimary,
+                                        onPressed: () {},
+                                      ),
+                                      SizedBox(height: 12),
+                                      InkWell(
+                                        onTap: () {
+                                          context.pop();
+                                        },
+                                        child: Container(
+                                          height: 52,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
+                                            border: Border.all(
+                                              color: AppColor.skyBlue,
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: AppColor.skyBlue,
+                                                offset: const Offset(0, 3),
+                                              ),
+                                            ],
+                                            color: AppColor.pureWhite,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              AppString
+                                                  .signinPasswordDialogSecondary,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium
+                                                  ?.signinSecondaryText,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 30),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }
+                          },
                           child: Text(
                             AppString.signinActiveCodeTextButton,
                             style: Theme.of(
@@ -192,9 +253,7 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
               border: InputBorder.none,
               hintText: AppString.signinPhoneHintText,
               errorStyle: TextStyle(height: 0),
-              hintStyle: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.signinHintText,
+              hintStyle: Theme.of(context).textTheme.bodyMedium?.signinHintText,
               suffixIcon: IconButton(
                 constraints: const BoxConstraints(minHeight: 24, minWidth: 24),
                 padding: EdgeInsets.zero,
@@ -212,9 +271,7 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
             alignment: Alignment.centerLeft,
             child: Text(
               AppString.signinPhoneErrorShortText,
-              style: Theme.of(
-                context,
-              ).textTheme.labelSmall?.signinErrorText,
+              style: Theme.of(context).textTheme.labelSmall?.signinErrorText,
             ),
           ),
         if (widget.state.phone.displayError == PhoneValidationError.invalid)
@@ -222,9 +279,7 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
             alignment: Alignment.centerLeft,
             child: Text(
               AppString.signinPhoneErrorInvalidText,
-              style: Theme.of(
-                context,
-              ).textTheme.labelSmall?.signinErrorText,
+              style: Theme.of(context).textTheme.labelSmall?.signinErrorText,
             ),
           ),
         SizedBox(height: 12),
@@ -244,9 +299,7 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
               border: InputBorder.none,
               hintText: AppString.signinPasswordHintText,
               errorStyle: TextStyle(height: 0),
-              hintStyle: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.signinHintText,
+              hintStyle: Theme.of(context).textTheme.bodyMedium?.signinHintText,
               suffixIconConstraints: const BoxConstraints(
                 minHeight: 24,
                 minWidth: 24,
@@ -273,9 +326,7 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
           children: [
             Text(
               '${AppString.signinIdHintText}$deviceId',
-              style: Theme.of(
-                context,
-              ).textTheme.bodySmall?.signinIdText,
+              style: Theme.of(context).textTheme.bodySmall?.signinIdText,
             ),
             Expanded(child: Container()),
             TextButton(

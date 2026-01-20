@@ -16,6 +16,12 @@ class AppString{
   static const String signinPasswordHintText = 'Mật khẩu';
   static const String signinIdHintText = 'ID thiết bị: ';
   static const String signinForgotPasswordText = 'Quên mật khẩu?';
+  static const String signinPasswordDialog = 'Bạn đã nhập sai mật khẩu quá 5 lần.\nChọn "Quên mật khẩu" để khôi phục nhé.';
+  static const String signinPasswordDialogPrimary = 'Quên mật khẩu';
+  static const String signinPasswordDialogSecondary = 'Thử lại';
+
+
+
     
   //Signup
   static const String signupPrimaryButton = 'Tiếp tục';
@@ -79,6 +85,7 @@ class AssetString{
   
   //Signup
   static const String signupHeaderAsset = 'assets/image/monkey.png';
+  static const String signupDialogAsset = 'assets/image/signin_noti.png';
 
   //Signup/BirthSelection
   static const String signupBirthAsset = 'assets/image/name_input.png';
