@@ -1,3 +1,5 @@
+import 'package:cash_back_infor/features/ui/signin/bloc/signin_bloc.dart';
+import 'package:cash_back_infor/features/ui/signin/bloc/signin_event.dart';
 import 'package:cash_back_infor/features/ui/signin/components/loading_screen.dart';
 import 'package:cash_back_infor/features/ui/signin/cubit/signin_cubit.dart';
 import 'package:cash_back_infor/features/ui/signin/cubit/signin_state.dart';
@@ -23,7 +25,8 @@ class SigninWidget extends StatefulWidget {
 class _SigninWidgetState extends State<SigninWidget> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SigninCubit, SigninState>(
+    // return BlocBuilder<SigninCubit, SigninState>(
+    return BlocBuilder<SigninBloc, SigninState>(
       builder: (context, state) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -38,11 +41,13 @@ class _SigninWidgetState extends State<SigninWidget> {
                       state: state,
                       onPhoneChanged: (value) {
                         setState(() {
-                          context.read<SigninCubit>().phoneChanged(value);
+                          // context.read<SigninCubit>().phoneChanged(value);
+                          context.read<SigninBloc>().add(SigninOnPhoneChangedEvent(phone: value));
                         });
                       },
                     ),
-                    BlocListener<SigninCubit, SigninState>(
+                    BlocListener<SigninBloc, SigninState>(
+                    // BlocListener<SigninCubit, SigninState>(
                       listenWhen: (previous, current) =>
                           previous.status != current.status,
                       listener: (context, state) {
@@ -69,7 +74,8 @@ class _SigninWidgetState extends State<SigninWidget> {
                       child: PrimaryButton(
                         text: AppString.signinPrimaryButton,
                         onPressed: () {
-                          context.read<SigninCubit>().submit();
+                          // context.read<SigninCubit>().submit();
+                          context.read<SigninBloc>().add(SigninSubmitEvent());
                         },
                         enabled: true,
                       ),
@@ -88,7 +94,8 @@ class _SigninWidgetState extends State<SigninWidget> {
                         TextButton(
                           style: TextButton.styleFrom(padding: EdgeInsets.zero),
                           onPressed: () {
-                            context.read<SigninCubit>().countSignin();
+                            context.read<SigninBloc>().add(SigninCountEvent());
+                            // context.read<SigninCubit>().countSignin();
                             print(state.signCount);
                             if (state.signCount % 5 == 0 && state.signCount > 0) {
                               showDialog(

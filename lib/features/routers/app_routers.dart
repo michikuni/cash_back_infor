@@ -4,7 +4,7 @@ import 'package:cash_back_infor/domain/usecase/create_user_use_case.dart';
 import 'package:cash_back_infor/domain/usecase/get_user_use_case.dart';
 import 'package:cash_back_infor/features/ui/cashback/cash_back_info.dart';
 import 'package:cash_back_infor/features/ui/home/home.dart';
-import 'package:cash_back_infor/features/ui/signin/cubit/signin_cubit.dart';
+import 'package:cash_back_infor/features/ui/signin/bloc/signin_bloc.dart';
 import 'package:cash_back_infor/features/ui/signin/signin.dart';
 import 'package:cash_back_infor/features/ui/signup/components/birth_selection.dart';
 import 'package:cash_back_infor/features/ui/signup/components/english_level_selection.dart';
@@ -32,7 +32,8 @@ class AppRouters {
       GoRoute(
         path: '/',
         builder: (context, state) => BlocProvider(
-          create: (_) => SigninCubit(getUserUseCase: getIt<GetUserUseCase>()),
+          // create: (_) => SigninCubit(getUserUseCase: getIt<GetUserUseCase>()),
+          create: (_) => SigninBloc(getUserUseCase: getIt<GetUserUseCase>()),
           child: const SigninWidget(),
         ),
       ),
