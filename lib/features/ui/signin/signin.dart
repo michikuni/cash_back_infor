@@ -1,7 +1,6 @@
 import 'package:cash_back_infor/features/ui/signin/bloc/signin_bloc.dart';
 import 'package:cash_back_infor/features/ui/signin/bloc/signin_event.dart';
 import 'package:cash_back_infor/features/ui/signin/components/loading_screen.dart';
-import 'package:cash_back_infor/features/ui/signin/cubit/signin_cubit.dart';
 import 'package:cash_back_infor/features/ui/signin/cubit/signin_state.dart';
 import 'package:cash_back_infor/features/ui/signin/form/phone_input.dart';
 import 'package:cash_back_infor/features/ui/utils/base_noti_dialog.dart';
@@ -274,20 +273,32 @@ class _HeaderSectionWidgetState extends State<_HeaderSectionWidget> {
           ),
         ),
         if (widget.state.phone.displayError == PhoneValidationError.short)
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              AppString.signinPhoneErrorShortText,
-              style: Theme.of(context).textTheme.labelSmall?.signinErrorText,
-            ),
+          Column(
+            children: [
+              SizedBox(height: 8,),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  AppString.signinPhoneErrorShortText,
+                  style: Theme.of(context).textTheme.labelSmall?.signinErrorText,
+                ),
+              ),
+            ],
           ),
         if (widget.state.phone.displayError == PhoneValidationError.invalid)
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              AppString.signinPhoneErrorInvalidText,
-              style: Theme.of(context).textTheme.labelSmall?.signinErrorText,
-            ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top:8),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    AppString.signinPhoneErrorInvalidText,
+                    style: Theme.of(context).textTheme.labelSmall?.signinErrorText,
+                  ),
+                ),
+              ),
+            ],
           ),
         SizedBox(height: 12),
         Container(

@@ -164,12 +164,15 @@ class _PasswordInputSectionState extends State<PasswordInputSection> {
           ),
         ),
         if (widget.isValid)
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              AppString.signupPasswordValid,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColor.signupHeaderValid,
+          Padding(
+            padding: const EdgeInsets.only(top: 8, bottom: 16),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                AppString.signupPasswordValid,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: AppColor.signupHeaderValid,
+                ),
               ),
             ),
           ),
@@ -236,16 +239,19 @@ class _ConfirmPasswordInputSectionState
           ),
         ),
         if (!widget.state.confirmPassword.isPure) ...[
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              widget.state.confirmPassword.isValid
-                  ? AppString.signupConfirmPasswordValid
-                  : AppString.signupConfirmPasswordInvalid,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: widget.state.confirmPassword.isValid
-                    ? AppColor.signupHeaderValid
-                    : AppColor.signupHeaderError,
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                widget.state.confirmPassword.isValid
+                    ? AppString.signupConfirmPasswordValid
+                    : AppString.signupConfirmPasswordInvalid,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: widget.state.confirmPassword.isValid
+                      ? AppColor.signupHeaderValid
+                      : AppColor.signupHeaderError,
+                ),
               ),
             ),
           ),
