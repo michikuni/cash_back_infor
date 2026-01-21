@@ -2,7 +2,10 @@ import 'package:cash_back_infor/data/models/user.dart';
 import 'package:cash_back_infor/domain/entity/user.dart';
 import 'package:cash_back_infor/domain/repository/user.dart';
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
+
+@LazySingleton(as: IUserRepository)
 class UserRepositoryImpl extends IUserRepository {
   final Dio dio;
   UserRepositoryImpl(this.dio);

@@ -65,7 +65,8 @@ class AppString{
   static const String signupNameInputHint = 'Tên';
   static const String signupNameInputPrimary = 'Tiếp tục';
 
-
+  //Utils/BaseNoti
+  static const String baseNotiTitleText = 'Thông báo';
 
 }
 

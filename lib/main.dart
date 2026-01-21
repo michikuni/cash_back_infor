@@ -5,7 +5,8 @@ import './di/setup.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  setup();
+  // setup();
+  configureDependencies();
   runApp(const MonkeyApp());
 }
 

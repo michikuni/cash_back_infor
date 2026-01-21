@@ -1,3 +1,6 @@
+import 'package:cash_back_infor/features/theme/color_theme.dart';
+import 'package:cash_back_infor/features/theme/text_decoration.dart';
+import 'package:cash_back_infor/utils/text_define.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,7 +25,7 @@ class BaseNotiDiaLogWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(36),
-          color: Colors.white,
+          color: AppColor.pureWhite,
         ),
         height: height,
         child: Stack(
@@ -33,7 +36,7 @@ class BaseNotiDiaLogWidget extends StatelessWidget {
               child: Container(
                 height: height - 4,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColor.pureWhite,
                   borderRadius: BorderRadius.circular(36),
                 ),
                 padding: EdgeInsets.all(24),
@@ -43,11 +46,11 @@ class BaseNotiDiaLogWidget extends StatelessWidget {
                     Image.asset(imageUrl,height: 146,width: 176,),
                     SizedBox(height: 12,),
                     Text(
-                      'Thông báo',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Color(0xFF4B4B4B))
+                      AppString.baseNotiTitleText,
+                      style: Theme.of(context).textTheme.bodyLarge?.baseNotiTitleText
                     ),
                     SizedBox(height: 12,),
-                    Text(title, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Color(0xFF777777)), textAlign: TextAlign.center,),
+                    Text(title, style: Theme.of(context).textTheme.bodySmall?.baseNotiText, textAlign: TextAlign.center,),
                     SizedBox(height: 24),
                     child           
                   ],
@@ -61,13 +64,13 @@ class BaseNotiDiaLogWidget extends StatelessWidget {
                 onTap: () => context.pop(),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColor.pureWhite,
                     shape: BoxShape.circle,
                   ),
                   padding: EdgeInsets.all(2),
                   child: const Icon(
                     Icons.cancel_rounded,
-                    color: Color(0xFFAFAFAF),
+                    color: AppColor.mediumGrey,
                     size: 40,
                   ),
                 ),

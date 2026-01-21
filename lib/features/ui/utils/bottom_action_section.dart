@@ -34,7 +34,7 @@ class BottomActionSection extends StatelessWidget {
             const Expanded(child: Divider()),
           ],
         ),
-        SizedBox(height: 43),
+        SizedBox(height: 44),
         Row(
           children: [
             Expanded(
@@ -88,7 +88,7 @@ class BottomActionSection extends StatelessWidget {
         ),
         SizedBox(height: 28),
         SizedBox(
-          height: 51,
+          height: 52,
           width: double.infinity,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

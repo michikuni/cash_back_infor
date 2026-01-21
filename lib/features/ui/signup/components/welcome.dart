@@ -17,7 +17,7 @@ class WelcomeWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 45),
+            SizedBox(height: 44),
             Text(
               AppString.signupWelcome,
               style: Theme.of(

@@ -62,7 +62,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                       },
                       enabled: context.read<SignupCubit>().buttonState(),
                     ),
-                    const SizedBox(height: 27),
+                    const SizedBox(height: 28),
                     BottomActionSection(
                       text: AppString.signupBottomText,
                       textButton: AppString.signupBottomTextButton,
@@ -120,9 +120,9 @@ class _HeaderSection extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.center,
-          child: Image.asset(AssetString.signupHeaderAsset, width: 151),
+          child: Image.asset(AssetString.signupHeaderAsset, width: 152),
         ),
-        const SizedBox(height: 11),
+        const SizedBox(height: 12),
         _buildInput(
           state,
           onPhoneChanged,

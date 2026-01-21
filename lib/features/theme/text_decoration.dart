@@ -38,4 +38,10 @@ extension TextStyleDecoration on TextStyle {
 
   //Signup/Welcome
   TextStyle get signupWelcomeText => copyWith(color: AppColor.skyBlue);
+
+  //Utils/BaseNoti
+  TextStyle get baseNotiTitleText => copyWith(color: AppColor.ebonyGrey);
+  TextStyle get baseNotiText => copyWith(color: AppColor.slateGrey);
+
+
 }
