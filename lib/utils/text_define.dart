@@ -24,6 +24,8 @@ class AppString{
   static const String signupPrimaryButton = 'Tiếp tục';
   static const String signupBottomTextButton = 'Đăng nhập';
   static const String signupBottomText = 'đăng ký';
+  static const String signupCancelDialogSecondary = 'Hủy';
+
 
   //Signup/BirthSelection
   static const String signupBirthText = 'sinh vào năm nào?';

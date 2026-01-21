@@ -1,3 +1,6 @@
+import 'package:cash_back_infor/features/theme/color_theme.dart';
+import 'package:cash_back_infor/features/theme/text_decoration.dart';
+import 'package:cash_back_infor/features/ui/utils/base_noti_dialog.dart';
 import 'package:cash_back_infor/features/ui/utils/bottom_action_section.dart';
 import 'package:cash_back_infor/features/ui/utils/button_primary.dart';
 import 'package:cash_back_infor/utils/text_define.dart';
@@ -67,27 +70,64 @@ class _SignupWidgetState extends State<SignupWidget> {
                       text: AppString.signupBottomText,
                       textButton: AppString.signupBottomTextButton,
                       onChangedSign: () {
-                        // if (state.name.isNotValid) {
+                        if (state.name.isNotValid) {
                           context.go('/');
-                        // } else {
-                        //   showDialog(
-                        //     context: context,
-                        //     builder: (context) => BaseNotiDiaLogWidget(
-                        //       imageUrl: 'assets/image/signup_noti.png',
-                        //       title:
-                        //           'Ba mẹ sẽ mất đi hồ sơ học ${state.name}, ba mẹ có muốn đăng nhập không?',
-                        //       height: 384,
-                        //       child: Row(
-                        //         children: [
-                        //           PrimaryButton(
-                        //             text: 'Đăng nhập',
-                        //             onPressed: () => context.go('/'),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   );
-                        // }
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) => BaseNotiDiaLogWidget(
+                              imageUrl: 'assets/image/signup_noti.png',
+                              title:
+                                  'Ba mẹ sẽ mất đi hồ sơ học ${state.name.value}, ba mẹ có muốn đăng nhập không?',
+                              height: 384,
+                              child: Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      context.pop();
+                                    },
+                                    child: Container(
+                                      height: 52,
+                                      width: 128,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: AppColor.skyBlue,
+                                          width: 1,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: AppColor.skyBlue,
+                                            offset: const Offset(0, 3),
+                                          ),
+                                        ],
+                                        color: AppColor.pureWhite,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          AppString.signupCancelDialogSecondary,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium
+                                              ?.signinSecondaryText,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: PrimaryButton(
+                                      text: 'Đăng nhập',
+                                      onPressed: () {
+                                        context.go('/');
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }
                       },
                     ),
                   ],
